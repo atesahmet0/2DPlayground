@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqpvt6qjphv04"]
+
+[ext_resource type="Script" path="res://ShotgunBullet.gd" id="1_bwafr"]
+[ext_resource type="Texture2D" uid="uid://b8j1qqhcvo34f" path="res://tiles/Weapons/bullets/All_Fire_Bullet_Pixel_16x16_00.png" id="1_hqeop"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fv6yy"]
+bounce = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5iij"]
+atlas = ExtResource("1_hqeop")
+region = Rect2(256, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7rkg"]
+atlas = ExtResource("1_hqeop")
+region = Rect2(272, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmof4"]
+atlas = ExtResource("1_hqeop")
+region = Rect2(288, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgrha"]
+atlas = ExtResource("1_hqeop")
+region = Rect2(304, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v3un5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5iij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7rkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmof4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgrha")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwm0j"]
+size = Vector2(6, 2)
+
+[node name="Node2D" type="RigidBody2D"]
+collision_layer = 1073741824
+collision_mask = 2147483649
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_fv6yy")
+continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_bwafr")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_v3un5")
+frame_progress = 0.0393691
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cwm0j")

@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://b7ctt573siiqw"]
+
+[ext_resource type="Script" path="res://Scenes/FlyingEye.gd" id="1_ihjfw"]
+[ext_resource type="Texture2D" uid="uid://drh4ylghcyrx0" path="res://tiles/Enemies/Flying eye/Flight.png" id="1_kdrps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vfnc"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q6yp"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyue3"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tutdh"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6n8s"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmes8"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(750, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmauo"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(900, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltngo"]
+atlas = ExtResource("1_kdrps")
+region = Rect2(1050, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2fwt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vfnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q6yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyue3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tutdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6n8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmes8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmauo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltngo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 14.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtl2h"]
+height = 26.0
+
+[node name="FlyingEye" type="CharacterBody2D"]
+collision_layer = 2147483648
+collision_mask = 1073741825
+motion_mode = 1
+wall_min_slide_angle = 0.0
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 1.5708
+script = ExtResource("1_ihjfw")
+HEALTH = 3.0
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v2fwt")
+animation = &"idle"
+frame_progress = 0.539746
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+radius = 30.0
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 3)
+shape = SubResource("CapsuleShape2D_vtl2h")

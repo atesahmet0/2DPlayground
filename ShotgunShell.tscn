@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://blymqaswuyxy4"]
+
+[ext_resource type="Texture2D" uid="uid://do6s5xucv826n" path="res://tiles/Weapons/shotgun/FX/[SHOOTING_SHELL_01] Shotgun_V1.02.png" id="1_ef6ty"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d2tns"]
+bounce = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq1ld"]
+atlas = ExtResource("1_ef6ty")
+region = Rect2(673, 10, 17, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4tax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq1ld")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgd87"]
+size = Vector2(11, 6)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_d2tns")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_a4tax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 0)
+shape = SubResource("RectangleShape2D_xgd87")
