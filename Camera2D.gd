@@ -29,15 +29,13 @@ func _process(delta):
 		position.x = playerNode2D.position.x
 		moved.emit(self)
 		align()
-	# var characterY = playerNode2D.position.y
-	"""
-	if(abs(characterY - position.y) > thresholdY):
-		pass
-		# position.y = characterY
+		
+	# Y axis movement is disabled for a while.
+	
 	if trauma and SHAKE_ON_WEAPON_FIRE:
 		trauma = max(trauma - DECAY * delta, 0)
 		shake()
-	"""
+
 
 func shake():
 	var amount = pow(trauma, TRAUMA_POWER)
