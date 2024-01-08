@@ -6,6 +6,7 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 1
 @export var GRAVITY_SCALE: float = 10
 @export var RUN_SCALE: float = 2
 
+var left_most_x_position: float = -999999
 func _ready():
 	$AnimatedSprite2D.play("idle")
 
@@ -15,6 +16,10 @@ var is_double_jumping = false
 func _physics_process(_delta):
 	var gravity = GRAVITY_SCALE * GRAVITY
 	velocity.y += gravity
+	
+	# Don't let go back
+	if position.x < left_most_x_position:
+		position.x = left_most_x_position
 	
 	# Handle horizontal movement
 	if Input.is_action_pressed("move_right"):
@@ -95,3 +100,11 @@ func handle_animation():
 	
 	$AnimatedSprite2D.play(current_animation)
 	$AnimatedSprite2D.flip_h = hflip
+
+
+
+func _on_camera_2d_moved(camera):
+	# Calculate possible lowest x position of the character
+
+	var _left_most_x_position = position.x - (get_viewport_rect().size.x / 2)
+	left_most_x_position = _left_most_x_position

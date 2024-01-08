@@ -1,5 +1,7 @@
 extends Camera2D
 
+signal moved(camera: Camera2D)
+
 @export var playerNode2D: Node2D
 @export var thresholdY: float = 600
 
@@ -23,8 +25,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x = playerNode2D.position.x
-	align()
+	if position.x < playerNode2D.position.x:
+		position.x = playerNode2D.position.x
+		moved.emit(self)
+		align()
 	# var characterY = playerNode2D.position.y
 	"""
 	if(abs(characterY - position.y) > thresholdY):

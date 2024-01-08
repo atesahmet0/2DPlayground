@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var NODE_TO_FOLLOW: CharacterBody2D
+@export var NODE_TO_FOLLOW: Node2D
 @export var VELOCITY_SCALE: float = 1
 
 # Called when the node enters the scene tree for the first time.

@@ -41,7 +41,8 @@ func _process(delta):
 
 var x_momentum = 0
 func _physics_process(delta):
-	if is_dead:
+	# If dead don't move
+	if is_dead or is_dying:
 		return
 	
 	var next_path_position = $NavigationAgent2D.get_next_path_position()
@@ -54,11 +55,8 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y += gravity * GRAVITY_SCALE
-
-	var body = move_and_collide(velocity * delta)
-	if body:
-		jump(delta)
-		move_and_slide()
+	
+	move_and_slide()
 
 func jump(delta):
 	if is_on_floor():
@@ -72,6 +70,10 @@ func actor_setup():
 
 var bullet_count = 0
 func bullet_hit(bullet: RigidBody2D):
+	# If dead don't do anything
+	if is_dying or is_dead:
+		return
+	
 	# Bullet hit. Handle.
 	bullet_count += 1
 	x_momentum += log(bullet.linear_velocity.length())
@@ -100,6 +102,5 @@ func _on_animated_sprite_2d_animation_looped():
 	if is_dying:
 		if not is_dead:
 			is_dead = true
-			await get_tree().create_timer(1).timeout
-			queue_free(	)
+			queue_free()
 
