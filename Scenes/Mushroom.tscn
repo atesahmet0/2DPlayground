@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dfgkc3qst5hrk"]
+[gd_scene load_steps=30 format=3 uid="uid://dfgkc3qst5hrk"]
 
 [ext_resource type="Script" path="res://Scenes/Mushroom.gd" id="1_6kx1d"]
 [ext_resource type="Texture2D" uid="uid://w0i25phake37" path="res://tiles/Enemies/Mushroom/Idle.png" id="1_pcbbp"]
@@ -172,6 +172,19 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0i78f"]
 height = 40.0
 
+[sub_resource type="SystemFont" id="SystemFont_vvs31"]
+font_names = PackedStringArray("Copperplate")
+subpixel_positioning = 0
+oversampling = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7yy88"]
+line_spacing = 1.0
+font = SubResource("SystemFont_vvs31")
+font_size = 8
+font_color = Color(0.819608, 0.0431373, 0.192157, 0.419608)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Mushroom" type="CharacterBody2D"]
 collision_layer = 2147483649
 collision_mask = 1073741825
@@ -188,6 +201,22 @@ position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_0i78f")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HealthLabel" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "%100"
+label_settings = SubResource("LabelSettings_7yy88")
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

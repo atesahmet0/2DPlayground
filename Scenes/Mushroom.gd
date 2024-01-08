@@ -16,6 +16,10 @@ var hit_blood_scene = preload("res://Scenes/MushroomHitBlood.tscn")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var current_health: float = 0
+func _ready():
+	current_health = HEALTH
+
 var hit_animation = false
 func _process(delta):
 	if is_dead:
@@ -75,15 +79,20 @@ func bullet_hit(bullet: RigidBody2D):
 		return
 	
 	# Bullet hit. Handle.
-	bullet_count += 1
+	current_health -= 1
 	x_momentum += log(bullet.linear_velocity.length())
-	print(x_momentum)
-	if bullet_count >= HEALTH:
+	if current_health <= 0:
 		die()
 	bullet.queue_free()
 	
-	# Add blood particles
+	# Set Health Label
+	print("RATIO is: " + str(current_health / HEALTH))
+	print("Current health is: " + str(current_health) + "\n HEALTH is: " + str(HEALTH))
+	var label_text = "%" + str(int((current_health / HEALTH)* 100))
+	print(label_text)
+	$HealthLabel.text = label_text 
 	
+	# Add blood particles
 	var hit_position = bullet.position
 	var hit_velocity = bullet.linear_velocity
 	

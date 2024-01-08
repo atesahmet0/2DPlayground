@@ -5,6 +5,7 @@ extends Node
 var flying_eye_dead_effect_scene = preload("res://Scenes/FlyingEyeDeadBlood.tscn")
 var flying_eye_scene = preload("res://Scenes/FlyingEye.tscn")
 var flying_eye_script = preload("res://Scenes/FlyingEye.gd")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

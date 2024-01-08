@@ -1474,6 +1474,7 @@ HEALTH = 50
 TARGET = NodePath("../Player")
 SPEED = 100.0
 JUMP_SCALE = 2000.0
+MOMENTUM_SCALE = 400.0
 
 [node name="Mushroom2" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("12_hx8ab")]
 position = Vector2(2285, -518)
