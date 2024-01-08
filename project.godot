@@ -19,7 +19,9 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/resizable=false
+window/stretch/mode="viewport"
 
 [input]
 
@@ -62,3 +64,10 @@ move_run={
 [physics]
 
 common/physics_ticks_per_second=120
+
+[shader_globals]
+
+time_seed={
+"type": "float",
+"value": 0.0
+}

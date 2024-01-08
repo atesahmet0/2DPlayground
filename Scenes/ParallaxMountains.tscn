@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://qhr8ifobkfvv"]
+
+[ext_resource type="Shader" path="res://Parallax/auto_scroller.gdshader" id="1_rcidc"]
+[ext_resource type="Texture2D" uid="uid://46timjhea4qd" path="res://Parallax/far-clouds.png" id="2_66vs4"]
+[ext_resource type="Texture2D" uid="uid://kf0estfpnubv" path="res://Parallax/sky.png" id="3_hiokh"]
+[ext_resource type="Texture2D" uid="uid://cvwkwf7nux3yn" path="res://Parallax/far-mountains.png" id="4_t10fi"]
+[ext_resource type="Texture2D" uid="uid://h1cgpsl2anhi" path="res://Parallax/mountains.png" id="5_u8pa8"]
+[ext_resource type="Texture2D" uid="uid://qdnd41f1o6ym" path="res://Parallax/trees.png" id="6_54t5h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hpoi"]
+shader = ExtResource("1_rcidc")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/velocity_scale = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo4mu"]
+shader = ExtResource("1_rcidc")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/velocity_scale = 0.03
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5657w"]
+shader = ExtResource("1_rcidc")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/velocity_scale = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_feonh"]
+shader = ExtResource("1_rcidc")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/velocity_scale = 0.2
+
+[node name="ParallaxMountains" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Sky" type="TextureRect" parent="."]
+offset_right = 430.0
+offset_bottom = 240.0
+texture = ExtResource("3_hiokh")
+stretch_mode = 1
+
+[node name="FarClouds" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1hpoi")
+offset_right = 430.0
+offset_bottom = 240.0
+texture = ExtResource("2_66vs4")
+stretch_mode = 1
+
+[node name="FarMountains" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_oo4mu")
+offset_right = 430.0
+offset_bottom = 240.0
+texture = ExtResource("4_t10fi")
+stretch_mode = 1
+
+[node name="Mountains" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_5657w")
+offset_right = 430.0
+offset_bottom = 240.0
+texture = ExtResource("5_u8pa8")
+stretch_mode = 1
+
+[node name="Trees" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_feonh")
+offset_right = 430.0
+offset_bottom = 240.0
+texture = ExtResource("6_54t5h")
+stretch_mode = 1

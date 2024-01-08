@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bic1iprk28xju"]
+[gd_scene load_steps=24 format=3 uid="uid://bic1iprk28xju"]
 
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="1_7tkjg"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="1_k3rrs"]
@@ -8,10 +8,12 @@
 [ext_resource type="Script" path="res://Player.gd" id="4_inupw"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="5_oje37"]
 [ext_resource type="PackedScene" uid="uid://du862gpryqvtk" path="res://Shotgun.tscn" id="6_bhepv"]
+[ext_resource type="Script" path="res://Scenes/ParallaxMountains.gd" id="7_11v2l"]
 [ext_resource type="Texture2D" uid="uid://bcx1cpsdeh183" path="res://tiles/Background/Pink.png" id="8_4fn4x"]
 [ext_resource type="PackedScene" uid="uid://b7ctt573siiqw" path="res://Scenes/FlyingEye.tscn" id="9_tyo10"]
 [ext_resource type="Script" path="res://NavigationRegion2D.gd" id="10_wiqtc"]
 [ext_resource type="PackedScene" uid="uid://dfgkc3qst5hrk" path="res://Scenes/Mushroom.tscn" id="12_hx8ab"]
+[ext_resource type="PackedScene" uid="uid://qhr8ifobkfvv" path="res://Scenes/ParallaxMountains.tscn" id="13_rhlx4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vc3es"]
 bounce = 0.4
@@ -1416,16 +1418,23 @@ position = Vector2(58.3333, -0.833333)
 position = Vector2(4.16667, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playerNode2D")]
-position = Vector2(400, 0)
+position = Vector2(400, -402)
 ignore_rotation = false
-zoom = Vector2(1.5, 1.5)
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
 script = ExtResource("5_oje37")
 playerNode2D = NodePath("../Player")
 thresholdY = 300.0
-MAX_OFFSET = Vector2(50, 5)
+SHAKE_ON_WEAPON_FIRE = false
+MAX_OFFSET = Vector2(0, 0)
 MAX_ROLL = 0.0
+TRAUMA = 0.0
+
+[node name="ParallaxMountains" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("13_rhlx4")]
+z_index = -20
+position = Vector2(-957, -546)
+scale = Vector2(4.5, 4.5)
+script = ExtResource("7_11v2l")
+NODE_TO_FOLLOW = NodePath("../../Player")
+VELOCITY_SCALE = 0.001
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-360, -400)

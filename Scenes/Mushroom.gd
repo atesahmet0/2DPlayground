@@ -62,7 +62,7 @@ func _physics_process(delta):
 
 func jump(delta):
 	if is_on_floor():
-		print("jump")
+		# print("jump")
 		velocity = Vector2.UP * JUMP_SCALE
 	
 func actor_setup():
@@ -101,4 +101,5 @@ func _on_animated_sprite_2d_animation_looped():
 		if not is_dead:
 			is_dead = true
 			await get_tree().create_timer(1).timeout
-			call_deferred("queue_free")
+			queue_free(	)
+

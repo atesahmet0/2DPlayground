@@ -17,19 +17,23 @@ extends Camera2D
 var trauma = 1.0
 
 func _ready():
-	pass # Replace with function body.
+	# I don't know what is this. I guess it is useless.
+	set_process(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.x = playerNode2D.position.x
-	var characterY = playerNode2D.position.y
+	align()
+	# var characterY = playerNode2D.position.y
+	"""
 	if(abs(characterY - position.y) > thresholdY):
-		position.y = characterY
+		pass
+		# position.y = characterY
 	if trauma and SHAKE_ON_WEAPON_FIRE:
 		trauma = max(trauma - DECAY * delta, 0)
 		shake()
-
+	"""
 
 func shake():
 	var amount = pow(trauma, TRAUMA_POWER)
