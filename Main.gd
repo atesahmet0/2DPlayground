@@ -38,4 +38,3 @@ func _on_flying_eye_died(object):
 	var scene = flying_eye_dead_effect_scene.instantiate()
 	scene.start(object.position)
 	get_parent().add_child(scene)
-

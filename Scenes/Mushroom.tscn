@@ -172,14 +172,14 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0i78f"]
 height = 40.0
 
-[sub_resource type="SystemFont" id="SystemFont_vvs31"]
+[sub_resource type="SystemFont" id="SystemFont_a0k11"]
 font_names = PackedStringArray("Copperplate")
 subpixel_positioning = 0
 oversampling = 5.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_7yy88"]
 line_spacing = 1.0
-font = SubResource("SystemFont_vvs31")
+font = SubResource("SystemFont_a0k11")
 font_size = 8
 font_color = Color(0.819608, 0.0431373, 0.192157, 0.419608)
 outline_size = 2

@@ -5,9 +5,16 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 1
 @export var JUMP_STRENGTH = -1800
 @export var GRAVITY_SCALE: float = 10
 @export var RUN_SCALE: float = 2
+@export var HEALTH: float = 100
+"""
+selam
+"""
+@export var HEALTH_RESISTANCE: float = 1
 
 var left_most_x_position: float = -999999
+var current_health = 0
 func _ready():
+	current_health = HEALTH
 	$AnimatedSprite2D.play("idle")
 
 var jump_count = 0
@@ -54,6 +61,7 @@ func _physics_process(_delta):
 				velocity.y = 0
 			velocity.y += JUMP_STRENGTH
 			is_double_jumping = true
+	
 			jump_count += 1
 
 	if Input.is_action_pressed("move_down"):
@@ -61,8 +69,29 @@ func _physics_process(_delta):
 		
 	move_and_slide()
 	
-	handle_animation()
+	# Handle getting hit.
+	handle_hit()
 	
+func handle_hit():
+	for i in range(get_slide_collision_count()):
+		var body = get_slide_collision(i)
+		print("Body name is: " + str(body.get_collider().get_class()))
+		if body.get_collider().get_class() == "CharacterBody2D":
+			on_enemy_hit(null)
+
+var is_dead = false
+func _process(delta):
+	if is_dead:
+		return
+	
+	print("current_health player: " + str(current_health))
+	if current_health <= 0:
+		is_dead = true
+		
+	# Handle health label
+	$HealthLabel.text = str(int((current_health / HEALTH) * 100))
+	
+	handle_animation()
 func handle_animation():
 	var current_animation
 	var hflip = $AnimatedSprite2D.flip_h
@@ -101,6 +130,8 @@ func handle_animation():
 	$AnimatedSprite2D.play(current_animation)
 	$AnimatedSprite2D.flip_h = hflip
 
+func on_enemy_hit(enemy: CharacterBody2D):
+	current_health -= 10 / HEALTH_RESISTANCE
 
 
 func _on_camera_2d_moved(camera):
@@ -108,3 +139,4 @@ func _on_camera_2d_moved(camera):
 
 	var _left_most_x_position = position.x - (get_viewport_rect().size.x / 2)
 	left_most_x_position = _left_most_x_position
+

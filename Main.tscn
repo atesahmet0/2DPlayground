@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bic1iprk28xju"]
+[gd_scene load_steps=26 format=3 uid="uid://bic1iprk28xju"]
 
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="1_7tkjg"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="1_k3rrs"]
@@ -12,6 +12,19 @@
 [ext_resource type="Script" path="res://NavigationRegion2D.gd" id="10_wiqtc"]
 [ext_resource type="PackedScene" uid="uid://dfgkc3qst5hrk" path="res://Scenes/Mushroom.tscn" id="12_hx8ab"]
 [ext_resource type="PackedScene" uid="uid://qhr8ifobkfvv" path="res://Scenes/ParallaxMountains.tscn" id="13_rhlx4"]
+
+[sub_resource type="SystemFont" id="SystemFont_vvs31"]
+font_names = PackedStringArray("Copperplate")
+subpixel_positioning = 0
+oversampling = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkplr"]
+line_spacing = 1.0
+font = SubResource("SystemFont_vvs31")
+font_size = 8
+font_color = Color(1, 0.701961, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_11yrc"]
 vertices = PackedVector2Array(904, -176, 904, -284, 1022, -187, 1020, -136, 972, -135, 5161, -855, 5203, -83, 3784, -88, 3784, -556, -912, -841, 3676, -556, -452, -74, -917, -62, -452, -76, 1066, -230, 1067, -187, 3676, -89, 2651, -93, 2483, -276, 970, -92, 535, -91, 535, -183, 604, -176, 1122, -283, 1123, -233, 214, -186, 213, -91, -393, -76, 2030, -279, 604, -284)
@@ -1404,10 +1417,12 @@ script = ExtResource("1_rf6ay")
 z_index = 5
 position = Vector2(0, -128)
 scale = Vector2(3, 3)
+collision_mask = 129
 script = ExtResource("4_inupw")
 JUMP_STRENGTH = -800
 GRAVITY_SCALE = 2.5
 RUN_SCALE = 1.5
+HEALTH_RESISTANCE = 50.0
 
 [node name="ShotgunPosition" type="Marker2D" parent="Player"]
 z_index = 6
@@ -1423,6 +1438,22 @@ position = Vector2(58.3333, -0.833333)
 
 [node name="Chamber" type="Marker2D" parent="Player/ShotgunPosition/Shotgun"]
 position = Vector2(4.16667, 0)
+
+[node name="HealthLabel" type="Label" parent="Player"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -19.6667
+offset_right = 25.0
+offset_bottom = -10.6667
+grow_horizontal = 2
+grow_vertical = 0
+text = "%100"
+label_settings = SubResource("LabelSettings_pkplr")
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playerNode2D")]
 position = Vector2(400, -402)
