@@ -1,29 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://qhr8ifobkfvv"]
+[gd_scene load_steps=12 format=3 uid="uid://bu3fdfafw8iwk"]
 
-[ext_resource type="Shader" path="res://Parallax/auto_scroller.gdshader" id="1_rcidc"]
-[ext_resource type="Texture2D" uid="uid://46timjhea4qd" path="res://Parallax/far-clouds.png" id="2_66vs4"]
-[ext_resource type="Texture2D" uid="uid://kf0estfpnubv" path="res://Parallax/sky.png" id="3_hiokh"]
-[ext_resource type="Texture2D" uid="uid://cvwkwf7nux3yn" path="res://Parallax/far-mountains.png" id="4_t10fi"]
-[ext_resource type="Texture2D" uid="uid://h1cgpsl2anhi" path="res://Parallax/mountains.png" id="5_u8pa8"]
-[ext_resource type="Texture2D" uid="uid://qdnd41f1o6ym" path="res://Parallax/trees.png" id="6_54t5h"]
+[ext_resource type="Texture2D" uid="uid://kf0estfpnubv" path="res://Parallax/sky.png" id="1_k0n1m"]
+[ext_resource type="Shader" path="res://Scenes/MainMenu/auto_scroller_main_menu.gdshader" id="1_yq0x5"]
+[ext_resource type="Texture2D" uid="uid://46timjhea4qd" path="res://Parallax/far-clouds.png" id="3_45shl"]
+[ext_resource type="Texture2D" uid="uid://cvwkwf7nux3yn" path="res://Parallax/far-mountains.png" id="4_vcu57"]
+[ext_resource type="Texture2D" uid="uid://h1cgpsl2anhi" path="res://Parallax/mountains.png" id="5_stqkp"]
+[ext_resource type="Texture2D" uid="uid://qdnd41f1o6ym" path="res://Parallax/trees.png" id="6_76lka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8x8kq"]
+shader = ExtResource("1_yq0x5")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/velocity_scale = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1hpoi"]
-shader = ExtResource("1_rcidc")
+shader = ExtResource("1_yq0x5")
 shader_parameter/direction = Vector2(1, 0)
 shader_parameter/velocity_scale = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oo4mu"]
-shader = ExtResource("1_rcidc")
+shader = ExtResource("1_yq0x5")
 shader_parameter/direction = Vector2(1, 0)
 shader_parameter/velocity_scale = 0.03
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5657w"]
-shader = ExtResource("1_rcidc")
+shader = ExtResource("1_yq0x5")
 shader_parameter/direction = Vector2(1, 0)
 shader_parameter/velocity_scale = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_feonh"]
-shader = ExtResource("1_rcidc")
+shader = ExtResource("1_yq0x5")
 shader_parameter/direction = Vector2(1, 0)
 shader_parameter/velocity_scale = 0.2
 
@@ -33,35 +38,41 @@ anchors_preset = 0
 metadata/_edit_group_ = true
 
 [node name="Sky" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8x8kq")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
-texture = ExtResource("3_hiokh")
+texture = ExtResource("1_k0n1m")
 stretch_mode = 1
 
 [node name="FarClouds" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_1hpoi")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
-texture = ExtResource("2_66vs4")
+texture = ExtResource("3_45shl")
 stretch_mode = 1
 
 [node name="FarMountains" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_oo4mu")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
-texture = ExtResource("4_t10fi")
+texture = ExtResource("4_vcu57")
 stretch_mode = 1
 
 [node name="Mountains" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_5657w")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
-texture = ExtResource("5_u8pa8")
+texture = ExtResource("5_stqkp")
 stretch_mode = 1
 
 [node name="Trees" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_feonh")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
-texture = ExtResource("6_54t5h")
+texture = ExtResource("6_76lka")
 stretch_mode = 1

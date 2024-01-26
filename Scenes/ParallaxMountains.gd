@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var NODE_TO_FOLLOW: Node2D
 @export var VELOCITY_SCALE: float = 1

@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh7hrlufueci2"]
+
+[ext_resource type="PackedScene" uid="uid://bu3fdfafw8iwk" path="res://Scenes/MainMenu/CustomMountainParallax/MainMenuParallaxMountains.tscn" id="1_4gndy"]
+
+[sub_resource type="SystemFont" id="SystemFont_kqwq8"]
+font_names = PackedStringArray("Copperplate")
+oversampling = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ogp8x"]
+font = SubResource("SystemFont_kqwq8")
+font_size = 128
+font_color = Color(0.870588, 0, 0.117647, 1)
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xwym"]
+font = SubResource("SystemFont_kqwq8")
+font_size = 64
+font_color = Color(0.870588, 0, 0.117647, 1)
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParallaxMountains" parent="." instance=ExtResource("1_4gndy")]
+scale = Vector2(4.5, 4.5)
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.332407
+anchor_right = 0.5
+anchor_bottom = 0.332407
+offset_left = -379.0
+offset_top = -65.0
+offset_right = 379.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Alive Cells
+"
+label_settings = SubResource("LabelSettings_ogp8x")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.573148
+anchor_right = 0.5
+anchor_bottom = 0.573148
+offset_left = -379.0
+offset_top = -65.0
+offset_right = 379.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit
+"
+label_settings = SubResource("LabelSettings_1xwym")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.452778
+anchor_right = 0.5
+anchor_bottom = 0.452778
+offset_left = -379.0
+offset_top = -65.0
+offset_right = 379.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+label_settings = SubResource("LabelSettings_1xwym")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="Start" to="." method="_on_start_gui_input"]

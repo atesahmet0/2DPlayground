@@ -6,9 +6,6 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 1
 @export var GRAVITY_SCALE: float = 10
 @export var RUN_SCALE: float = 2
 @export var HEALTH: float = 100
-"""
-selam
-"""
 @export var HEALTH_RESISTANCE: float = 1
 
 var left_most_x_position: float = -999999
