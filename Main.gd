@@ -12,8 +12,7 @@ func _ready():
 		$Game.set_visible(false)
 		$MainMenu.set_visible(true)
 		$Game.find_child("Camera2D").position = $MainMenu.position + ($MainMenu.size / 2)
-		
-
+		$Game.find_child("Camera2D").SHAKE_ON_WEAPON_FIRE = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,3 +24,10 @@ func _on_main_menu_start_clicked():
 	$Game.set_visible(true)
 	$MainMenu.set_visible(false)
 	$Game.find_child("Camera2D").position.y = -402 
+	$Game.find_child("Camera2D").SHAKE_ON_WEAPON_FIRE = true
+
+
+
+# Exi game.
+func _on_main_menu_exit_clicked():
+	get_tree().quit()

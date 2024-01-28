@@ -1544,4 +1544,5 @@ JUMP_SCALE = 2000.0
 [connection signal="weapon_fired" from="Game/Player/ShotgunPosition/Shotgun" to="Game/Camera2D" method="_on_shotgun_weapon_fired"]
 [connection signal="moved" from="Game/Camera2D" to="Game/Player" method="_on_camera_2d_moved"]
 [connection signal="timeout" from="Game/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="exit_clicked" from="MainMenu" to="." method="_on_main_menu_exit_clicked"]
 [connection signal="start_clicked" from="MainMenu" to="." method="_on_main_menu_start_clicked"]
