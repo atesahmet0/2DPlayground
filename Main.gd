@@ -23,6 +23,7 @@ func _on_main_menu_start_clicked():
 	is_game_started = true
 	$Game.set_visible(true)
 	$MainMenu.set_visible(false)
+	# Changing cameras y value to where it belongs.
 	$Game.find_child("Camera2D").position.y = -402 
 	$Game.find_child("Camera2D").SHAKE_ON_WEAPON_FIRE = true
 

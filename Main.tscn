@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bic1iprk28xju"]
+[gd_scene load_steps=28 format=3 uid="uid://bic1iprk28xju"]
 
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="1_7tkjg"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="1_k3rrs"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dfgkc3qst5hrk" path="res://Scenes/Mushroom.tscn" id="12_hx8ab"]
 [ext_resource type="PackedScene" uid="uid://dh7hrlufueci2" path="res://Scenes/MainMenu/MainMenu.tscn" id="13_6k0co"]
 [ext_resource type="PackedScene" uid="uid://qhr8ifobkfvv" path="res://Scenes/ParallaxMountains.tscn" id="13_rhlx4"]
+[ext_resource type="AudioStream" uid="uid://dw5stfby4kf1c" path="res://sounds/background_song.mp3" id="14_ov4yh"]
 
 [sub_resource type="SystemFont" id="SystemFont_vvs31"]
 font_names = PackedStringArray("Copperplate")
@@ -1540,6 +1541,10 @@ SPEED = 100.0
 JUMP_SCALE = 2000.0
 
 [node name="MainMenu" parent="." instance=ExtResource("13_6k0co")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ov4yh")
+autoplay = true
 
 [connection signal="weapon_fired" from="Game/Player/ShotgunPosition/Shotgun" to="Game/Camera2D" method="_on_shotgun_weapon_fired"]
 [connection signal="moved" from="Game/Camera2D" to="Game/Player" method="_on_camera_2d_moved"]
