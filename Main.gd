@@ -18,3 +18,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+# Called when start game clicked.
+func _on_main_menu_start_clicked():
+	is_game_started = true
+	$Game.set_visible(true)
+	$MainMenu.set_visible(false)
+	$Game.find_child("Camera2D").position.y = -402 

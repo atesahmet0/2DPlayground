@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh7hrlufueci2"]
+[gd_scene load_steps=6 format=3 uid="uid://dh7hrlufueci2"]
 
 [ext_resource type="PackedScene" uid="uid://bu3fdfafw8iwk" path="res://Scenes/MainMenu/CustomMountainParallax/MainMenuParallaxMountains.tscn" id="1_4gndy"]
+[ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="1_hlks4"]
 
 [sub_resource type="SystemFont" id="SystemFont_kqwq8"]
 font_names = PackedStringArray("Copperplate")
@@ -27,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hlks4")
 
 [node name="ParallaxMountains" parent="." instance=ExtResource("1_4gndy")]
 scale = Vector2(4.5, 4.5)
@@ -64,6 +66,7 @@ offset_right = 379.0
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 text = "Exit
 "
 label_settings = SubResource("LabelSettings_1xwym")
@@ -84,6 +87,7 @@ offset_right = 379.0
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 text = "Start Game"
 label_settings = SubResource("LabelSettings_1xwym")
 horizontal_alignment = 1
@@ -91,4 +95,5 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="Exit" to="." method="_on_exit_gui_input"]
 [connection signal="gui_input" from="Start" to="." method="_on_start_gui_input"]
