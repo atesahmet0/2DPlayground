@@ -79,7 +79,9 @@ func bullet_hit(bullet: RigidBody2D):
 		return
 	
 	# Bullet hit. Handle.
-	current_health -= 1
+	current_health -= 4
+	if current_health < 0:
+		current_health = 0
 	x_momentum += log(bullet.linear_velocity.length())
 	if current_health <= 0:
 		die()
