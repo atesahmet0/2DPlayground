@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=26 format=3 uid="uid://dbafsfjkbroho"]
 
+[ext_resource type="Script" path="res://Scenes/Levels/level_1.gd" id="1_srdxa"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="1_u106e"]
 [ext_resource type="Script" path="res://Player.gd" id="2_y02wx"]
 [ext_resource type="PackedScene" uid="uid://du862gpryqvtk" path="res://Shotgun.tscn" id="3_g7kg5"]
@@ -1410,6 +1411,7 @@ pattern_2 = SubResource("TileMapPattern_auaid")
 pattern_3 = SubResource("TileMapPattern_o4j5l")
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_srdxa")
 
 [node name="Player" parent="." instance=ExtResource("1_u106e")]
 z_index = 5
@@ -1532,4 +1534,5 @@ TARGET = NodePath("../Player")
 SPEED = 100.0
 JUMP_SCALE = 2000.0
 
+[connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
 [connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]

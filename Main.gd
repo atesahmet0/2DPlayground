@@ -39,3 +39,5 @@ func _on_main_menu_start_clicked():
 # Exi game.
 func _on_main_menu_exit_clicked():
 	get_tree().quit()
+
+func 

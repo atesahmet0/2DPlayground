@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal character_died
+
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 100
 @export var WALK_SPEED = 500
 @export var JUMP_STRENGTH = -1800
@@ -80,15 +82,12 @@ var is_dead = false
 func _process(delta):
 	if is_dead:
 		return
-	
-	print("current_health player: " + str(current_health))
-	if current_health <= 0:
-		is_dead = true
 		
 	# Handle health label
 	$HealthLabel.text = str(int((current_health / HEALTH) * 100))
 	
 	handle_animation()
+
 func handle_animation():
 	var current_animation
 	var hflip = $AnimatedSprite2D.flip_h
@@ -111,8 +110,6 @@ func handle_animation():
 		hflip = true
 	else:
 		hflip= false
-
-	
 	
 	# In 2D down is positive y
 	if velocity.y > 0 and not velocity.is_zero_approx():
@@ -127,13 +124,17 @@ func handle_animation():
 	$AnimatedSprite2D.play(current_animation)
 	$AnimatedSprite2D.flip_h = hflip
 
+func died():
+	is_dead = true
+	character_died.emit()
+	
 func on_enemy_hit(enemy: CharacterBody2D):
 	current_health -= 10 / HEALTH_RESISTANCE
-
-
+	if current_health <= 0:
+		died()
+		
 func _on_camera_2d_moved(camera):
 	# Calculate possible lowest x position of the character
-
 	var _left_most_x_position = position.x - (get_viewport_rect().size.x / 2)
 	left_most_x_position = _left_most_x_position
 
