@@ -78,20 +78,19 @@ func bullet_hit(bullet: RigidBody2D):
 	if is_dying or is_dead:
 		return
 	
-	# Bullet hit. Handle.
+	# Handle health
 	current_health -= 4
 	if current_health < 0:
 		current_health = 0
+	
+	# Handle knockback
 	x_momentum += log(bullet.linear_velocity.length())
 	if current_health <= 0:
 		die()
 	bullet.queue_free()
 	
 	# Set Health Label
-	print("RATIO is: " + str(current_health / HEALTH))
-	print("Current health is: " + str(current_health) + "\n HEALTH is: " + str(HEALTH))
 	var label_text = "%" + str(int((current_health / HEALTH)* 100))
-	print(label_text)
 	$HealthLabel.text = label_text 
 	
 	# Add blood particles

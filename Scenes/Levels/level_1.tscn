@@ -1419,6 +1419,7 @@ position = Vector2(0, -128)
 scale = Vector2(3, 3)
 collision_mask = 129
 script = ExtResource("2_y02wx")
+WALK_SPEED = 400
 JUMP_STRENGTH = -800
 GRAVITY_SCALE = 2.5
 RUN_SCALE = 1.5
