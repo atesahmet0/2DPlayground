@@ -1,6 +1,6 @@
 extends Node2D
 
-signal weapon_fired
+signal weapon_fired(current_ammo: int)
 
 @export_category("Bullet Properties")
 # BUllets will be deleted after this.
@@ -27,6 +27,9 @@ signal weapon_fired
 
 var bullet_scene = preload("res://ShotgunBullet.tscn")
 var shell_scene = preload("res://ShotgunShell.tscn")
+
+# Ammo left in the gun
+var current_ammo: int = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -117,14 +120,17 @@ func _physics_process(delta):
 var time_between_shots: float = 60 / SHOTS_PER_MINUTE
 var last_fire = 0
 var can_fire = true
+
 func fire():
-	
 	# Check can fire
-	if Time.get_ticks_msec() - last_fire < time_between_shots * 1000:
-		# Not enough time passed since last shot. Return.
+	if current_ammo <= 0:
+		# No ammo left
+		return
+	if Time.get_ticks_msec() - last_fire < time_between_shots * 100:
+		# Not enough time passed since last shot
 		return
 	
-	# Handling fire.
+	# Handle fire
 	
 	last_fire = Time.get_ticks_msec()
 	
@@ -135,9 +141,6 @@ func fire():
 	# Play audio
 	$AudioStreamPlayer2D.stream = GUN_SHOT_AUDIOS[randi() % GUN_SHOT_AUDIOS.size() ]
 	$AudioStreamPlayer2D.play()
-	
-	# Signal weapon fire
-	weapon_fired.emit()
 	
 	# Spawn bullets
 	for i in range(BULLET_COUNT):
@@ -156,7 +159,10 @@ func fire():
 		# Adding bullet to the list.
 		get_parent().get_parent().get_parent().call_deferred("add_child", bullet)
 		bullet.call_deferred("delete_after", BULLET_LIFE_TIME)
-		
+	
+	# Decrease ammo count
+	current_ammo -= 1
+	
 	# Spawn shell
 	var shell = shell_scene.instantiate()
 	var shell_direction = (get_global_mouse_position() - $Chamber.global_position).normalized()
@@ -167,11 +173,14 @@ func fire():
 	get_parent().get_parent().get_parent().call_deferred("add_child",shell)
 	delete_object_after(shell, BULLET_LIFE_TIME)
 	
-	# Backfiring
 	recoil()
 	
 	# Barrel smoke
 	$GPUParticles2D.restart()
+	
+	# Signal weapon fire
+	weapon_fired.emit(current_ammo)
+
 
 func recoil():
 	# Firing gun while still in recoil gives us wrong directions. So be carefull.

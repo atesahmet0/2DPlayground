@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=29 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level_1.gd" id="1_srdxa"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="1_u106e"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Camera2D.gd" id="4_28o8t"]
 [ext_resource type="PackedScene" uid="uid://qhr8ifobkfvv" path="res://Scenes/ParallaxMountains.tscn" id="5_g5ekn"]
 [ext_resource type="Script" path="res://Scenes/ParallaxMountains.gd" id="6_hvckd"]
+[ext_resource type="Script" path="res://Scenes/Levels/Label.gd" id="6_yusku"]
 [ext_resource type="Script" path="res://NavigationRegion2D.gd" id="7_bann4"]
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="8_h3501"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="9_7iv7s"]
@@ -24,6 +25,17 @@ font = SubResource("SystemFont_vvs31")
 font_size = 8
 font_color = Color(1, 0.701961, 0, 1)
 outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_kqwq8"]
+font_names = PackedStringArray("Copperplate")
+oversampling = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vxr2b"]
+font = SubResource("SystemFont_kqwq8")
+font_size = 64
+font_color = Color(0.870588, 0, 0.117647, 1)
+outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_oiqta"]
@@ -1466,6 +1478,24 @@ DECAY = 3
 MAX_OFFSET = Vector2(30, 0)
 MAX_ROLL = 0.0
 
+[node name="Label" type="Label" parent="Camera2D"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 620.0
+offset_top = 430.0
+offset_right = 905.0
+offset_bottom = 495.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "ammo: 10"
+label_settings = SubResource("LabelSettings_vxr2b")
+script = ExtResource("6_yusku")
+metadata/_edit_use_anchors_ = true
+
 [node name="ParallaxMountains" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("5_g5ekn")]
 z_index = -20
 offset_left = -1008.0
@@ -1536,4 +1566,5 @@ SPEED = 100.0
 JUMP_SCALE = 2000.0
 
 [connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
+[connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Camera2D/Label" method="_on_shotgun_weapon_fired"]
 [connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]
