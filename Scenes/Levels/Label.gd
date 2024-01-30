@@ -1,14 +1,15 @@
-extends Node2D
+extends Label
 
-signal character_died
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func _on_player_character_died(ammo_count):
-	character_died.emit()
+
+func _on_shotgun_weapon_fired(current_ammo):
+	text = "ammo: " + str(current_ammo)
