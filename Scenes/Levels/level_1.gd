@@ -1,11 +1,17 @@
-extends NavigationRegion2D
+extends Node2D
 
-@export var tiles: TileMap #Make sure to set as the tilemap you want blocked out
+signal character_died
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+
+func _on_player_character_died():
+	character_died.emit()
