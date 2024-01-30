@@ -10,5 +10,5 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_player_character_died(ammo_count):
+func _on_player_character_died():
 	character_died.emit()
