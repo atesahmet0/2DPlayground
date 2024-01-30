@@ -3,12 +3,16 @@ extends CharacterBody2D
 signal character_died
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 100
+@export_category("Player Properties")
 @export var WALK_SPEED = 500
 @export var JUMP_STRENGTH = -1800
 @export var GRAVITY_SCALE: float = 10
 @export var RUN_SCALE: float = 2
 @export var HEALTH: float = 100
 @export var HEALTH_RESISTANCE: float = 1
+
+# When characte's y value is lesser than this character felt to void.
+@export var void_beginning: float = 5000
 
 var left_most_x_position: float = -999999
 var current_health = 0
@@ -20,8 +24,13 @@ var jump_count = 0
 var is_running = false
 var is_double_jumping = false
 func _physics_process(_delta):
+	# Handle gravity
 	var gravity = GRAVITY_SCALE * GRAVITY
 	velocity.y += gravity
+	
+	# Check if felt to void
+	if void_beginning < position.y:
+		died()
 	
 	# Don't let go back
 	if position.x < left_most_x_position:
@@ -80,9 +89,7 @@ func handle_hit():
 
 var is_dead = false
 func _process(delta):
-	if is_dead:
-		return
-		
+	
 	# Handle health label
 	$HealthLabel.text = str(int((current_health / HEALTH) * 100))
 	
