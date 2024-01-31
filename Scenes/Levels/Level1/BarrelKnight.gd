@@ -15,9 +15,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_health: float = 0
 var current_state: STATE = STATE.IDLE
+var is_flipped: bool = false
 
 func _ready():
 	current_health = HEALTH
+
 
 var hit_animation = false
 func _process(delta):
@@ -31,12 +33,14 @@ func _process(delta):
 			$AnimatedSprite2D.play("run")
 		STATE.HIT:
 			$AnimatedSprite2D.play("attack1")
-	print("KNIGHT PROCESS CALLED")
-	# Handle direction
-	if velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
-	else:
+	
+	is_flipped = TARGET.global_position.x < global_position.x
+
+	# Handle direction of sprites
+	if is_flipped:
 		$AnimatedSprite2D.flip_h = true
+	else:
+		$AnimatedSprite2D.flip_h = false
 	
 	call_deferred("actor_setup")
 
@@ -44,10 +48,19 @@ func _physics_process(delta):
 	# If dead don't move
 	if current_state == STATE.DEAD:
 		return
+		
+	# Handle direction of physcics objects
+	if is_flipped:
+		$SwingArea/CollisionShape2D.position.x = -10
+	else:
+		$SwingArea/CollisionShape2D.position.x = 10
+
+	if not $NavigationAgent2D.is_target_reached():
+		var next_path_position = $NavigationAgent2D.get_next_path_position()
+		velocity = global_position.direction_to(next_path_position) * SPEED
+		current_state = STATE.RUN
 	
-	var next_path_position = $NavigationAgent2D.get_next_path_position()
-	velocity = global_position.direction_to(next_path_position) * SPEED
-	
+	# Gravity
 	if not is_on_floor():
 		velocity.y += gravity * GRAVITY_SCALE
 	
@@ -85,4 +98,23 @@ func die():
 	$AnimatedSprite2D.play("death")
 	$CollisionShape2D.set_deferred("disabled", true)
 
+# Reached target, attack
+func _on_navigation_agent_2d_target_reached():
+	current_state = STATE.HIT
 
+
+func attack():
+	# Swing weapon and check if character is in it
+	var bodies = $SwingArea.get_overlapping_bodies()
+	for body in bodies:
+		if body == TARGET:
+			# Hit the target
+			if body.has_method("got_hit"):
+				body.got_hit()
+
+
+func _on_animated_sprite_2d_frame_changed():
+	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 3:
+		# Weapon swing frame
+		attack()
+	

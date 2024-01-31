@@ -24,11 +24,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if position.x < playerNode2D.position.x:
+	if true or position.x < playerNode2D.position.x:
 		position.x = playerNode2D.position.x
 		moved.emit(self)
 		align()
-	
+
 	if trauma and SHAKE_ON_WEAPON_FIRE:
 		trauma = max(trauma - DECAY * delta, 0)
 		shake()

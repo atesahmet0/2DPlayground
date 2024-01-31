@@ -82,22 +82,12 @@ func _physics_process(_delta):
 		position.y += 2
 	
 	move_and_slide()
-	
-	# Handle getting hit.
-	handle_hit()
-	
-func handle_hit():
-	for i in range(get_slide_collision_count()):
-		var body = get_slide_collision(i)
-		print("Body name is: " + str(body.get_collider().get_class()))
-		if body.get_collider().get_class() == "CharacterBody2D":
-			on_enemy_hit(null)
+
 
 var is_dead = false
 func _process(delta):
-	
 	# Handle health label
-	$HealthLabel.text = str(int((current_health / HEALTH) * 100))
+	$HealthLabel.text = str(3 - hit_count)
 	
 	handle_animation()
 
@@ -151,3 +141,8 @@ func _on_camera_2d_moved(camera):
 	var _left_most_x_position = position.x - (get_viewport_rect().size.x / 2)
 	left_most_x_position = _left_most_x_position
 
+var hit_count = 0
+func got_hit():
+	hit_count += 1
+	if hit_count > 2:
+		died()
