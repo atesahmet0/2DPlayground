@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d02mialwg7s18"
-path="res://.godot/imported/run.png-ec8d1a4235149543788d4764a4ba1c68.ctex"
+uid="uid://yasdqju8gyus"
+path="res://.godot/imported/Knight_anin.png-60bef6c484a339a98b33e46960786664.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/Enemies/Barrel Knight/run.png"
-dest_files=["res://.godot/imported/run.png-ec8d1a4235149543788d4764a4ba1c68.ctex"]
+source_file="res://tiles/Enemies/Barrel Knight/Knight_anin.png"
+dest_files=["res://.godot/imported/Knight_anin.png-60bef6c484a339a98b33e46960786664.ctex"]
 
 [params]
 

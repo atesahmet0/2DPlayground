@@ -1,6 +1,6 @@
 extends Node
 
-var level1 = preload("res://Scenes/Levels/level_1.tscn")
+var level1 = preload("res://Scenes/Levels/Level1/level_1.tscn")
 var current_level: Node = null
 var is_game_started = false
 

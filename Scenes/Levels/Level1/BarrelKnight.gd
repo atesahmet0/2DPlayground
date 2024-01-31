@@ -11,6 +11,8 @@ signal died(object)
 @export_category("Momentum")
 @export var MOMENTUM_SCALE: float = 200
 
+var hit_blood_scene = preload("res://Scenes/MushroomHitBlood.tscn")
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -24,7 +26,10 @@ func _process(delta):
 		return
 	
 	if is_dying:
-		$AnimatedSprite2D.play("death")
+		$AnimatedSprite2D.play("dead")
+	elif x_momentum > 1 or hit_animation:
+		hit_animation = true
+		$AnimatedSprite2D.play("take_hit")
 	elif velocity.is_zero_approx():
 		$AnimatedSprite2D.play("idle")
 	else:
@@ -84,9 +89,17 @@ func bullet_hit(bullet: RigidBody2D):
 		die()
 	bullet.queue_free()
 	
+	# Set Health Label
+	var label_text = "%" + str(int((current_health / HEALTH)* 100))
+	$HealthLabel.text = label_text 
+	
 	# Add blood particles
 	var hit_position = bullet.position
 	var hit_velocity = bullet.linear_velocity
+	
+	var blood = hit_blood_scene.instantiate()
+	blood.start(hit_position, hit_velocity)
+	get_parent().add_child(blood)
 
 var is_dying = false
 var is_dead = false

@@ -76,7 +76,11 @@ func _physics_process(_delta):
 
 	if Input.is_action_pressed("move_down"):
 		velocity.y = 30 * gravity
-		
+	
+	# Get down from platform
+	if Input.is_action_just_pressed("move_down") and is_on_floor():
+		position.y += 2
+	
 	move_and_slide()
 	
 	# Handle getting hit.
@@ -129,10 +133,6 @@ func handle_animation():
 	
 	if is_double_jumping and velocity.y < 0:
 		current_animation = "double_jump"
-	
-	# Get down from platform
-	if Input.is_action_just_pressed("move_down") and is_on_floor():
-		position.y += 2
 	
 	$AnimatedSprite2D.play(current_animation)
 	$AnimatedSprite2D.flip_h = hflip
