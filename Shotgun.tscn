@@ -1,113 +1,22 @@
-[gd_scene load_steps=39 format=3 uid="uid://du862gpryqvtk"]
+[gd_scene load_steps=26 format=3 uid="uid://du862gpryqvtk"]
 
-[ext_resource type="Texture2D" uid="uid://kl04usoiwq6t" path="res://tiles/Weapons/shotgun/Weapon/[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02.png" id="1_bxb57"]
 [ext_resource type="Script" path="res://Shotgun.gd" id="1_uaudv"]
 [ext_resource type="Texture2D" uid="uid://n4hd1yxfw8fm" path="res://tiles/Weapons/shotgun/FX/[FULL_MUZZLE_FLASH] Shotgun_V1.02.png" id="2_083jc"]
 [ext_resource type="AudioStream" uid="uid://cuo4rvg1777g5" path="res://sounds/shotgun_sound2.mp3" id="3_nwslk"]
 [ext_resource type="AudioStream" uid="uid://bqbc7xols6tyw" path="res://sounds/shotgun_sound0.mp3" id="4_gsvb1"]
 [ext_resource type="AudioStream" uid="uid://bie3ducavt5tc" path="res://sounds/shotgun_sound3.mp3" id="4_hmcqb"]
 [ext_resource type="AudioStream" uid="uid://cx7nxkfowi5y7" path="res://sounds/shotgun_sound4.mp3" id="5_0q8qn"]
+[ext_resource type="Texture2D" uid="uid://bu2bduhacg6i4" path="res://tiles/Weapons/shotgun/Shotgun.png" id="6_xq060"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hg3hm"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(0, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i0ict"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(160, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bvrog"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(320, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ia86d"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(480, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_orreb"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(640, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2652i"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(800, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpsbo"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(960, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r3dji"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1120, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mim4b"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1280, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqhyf"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1440, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7dxj"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1600, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7qym"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1760, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cmosr"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(1920, 0, 160, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6fvu"]
-atlas = ExtResource("1_bxb57")
-region = Rect2(2080, 0, 160, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7elx"]
+atlas = ExtResource("6_xq060")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_reeyf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hg3hm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i0ict")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bvrog")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ia86d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_orreb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2652i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xpsbo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r3dji")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mim4b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xqhyf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u7dxj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7qym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cmosr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i6fvu")
+"texture": SubResource("AtlasTexture_n7elx")
 }],
 "loop": true,
 "name": &"shooting",
@@ -241,21 +150,20 @@ RECOIL_SPEED = 4000.0
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(44, 0)
+position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_reeyf")
 animation = &"shooting"
-frame = 2
-frame_progress = 0.537004
+frame_progress = 0.098288
 
 [node name="AnimatedSprite2DMuzzle" type="AnimatedSprite2D" parent="."]
-position = Vector2(72, -1)
+position = Vector2(37, -3)
 sprite_frames = SubResource("SpriteFrames_l6eru")
 animation = &"idle"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 z_index = 4
-position = Vector2(61, 0)
+position = Vector2(37, 0)
 emitting = false
 amount = 800
 process_material = SubResource("ParticleProcessMaterial_xp4u6")
