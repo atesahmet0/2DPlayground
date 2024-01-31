@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://en8ifmk02awg"]
+
+[ext_resource type="Texture2D" uid="uid://ckwale81bvdsr" path="res://tiles/Weapons/IceWand.png" id="1_m8q2k"]
+
+[node name="IceWand" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m8q2k")

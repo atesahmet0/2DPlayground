@@ -83,6 +83,7 @@ var is_dead = false
 func die():
 	died.emit(self)
 	is_dying = true
+	queue_free()
 
 func _on_animated_sprite_2d_animation_looped():
 	hit_animation = false
