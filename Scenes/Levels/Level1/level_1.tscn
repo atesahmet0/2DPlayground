@@ -1944,11 +1944,12 @@ thresholdY = 300.0
 DECAY = 3
 MAX_OFFSET = Vector2(30, 0)
 MAX_ROLL = 0.0
+TRAUMA = 1.3
 
 [node name="ParallaxSpringstar" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("6_x2vk5")]
-offset_left = -323.0
+offset_left = -360.0
 offset_top = -211.0
-offset_right = -323.0
+offset_right = -360.0
 offset_bottom = -211.0
 scale = Vector2(1.7, 1.7)
 script = ExtResource("7_ve57k")
@@ -1992,5 +1993,6 @@ camera = NodePath("../Camera2D")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
+[connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Camera2D" method="_on_shotgun_weapon_fired"]
 [connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Label" method="_on_shotgun_weapon_fired"]
 [connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]
