@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2ehwqgltx237"]
+
+[ext_resource type="Shader" path="res://Scenes/LightRays/LightRays.gdshader" id="1_ts2kf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab2uv"]
+shader = ExtResource("1_ts2kf")
+shader_parameter/angle = -0.3
+shader_parameter/position = -0.2
+shader_parameter/spread = 0.5
+shader_parameter/cutoff = 0.1
+shader_parameter/falloff = 0.2
+shader_parameter/edge_fade = 0.15
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Color(0.917647, 0.909804, 0.870588, 0.8)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_ab2uv")
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.227451, 1, 1)

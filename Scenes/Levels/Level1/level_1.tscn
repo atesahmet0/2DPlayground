@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=34 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -10,11 +10,12 @@
 [ext_resource type="Script" path="res://NavigationRegion2D.gd" id="8_jt5g8"]
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="9_58yw4"]
 [ext_resource type="Texture2D" uid="uid://di0tub401r147" path="res://tiles/Terrain/stringstar_fields.png" id="10_2h25t"]
+[ext_resource type="PackedScene" uid="uid://c2ehwqgltx237" path="res://Scenes/LightRays/LightRays.tscn" id="10_i3sf2"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="11_u3una"]
+[ext_resource type="Shader" path="res://Scenes/LightRays/LightRays.gdshader" id="11_vnq7i"]
 [ext_resource type="PackedScene" uid="uid://chsw4ofwr20ts" path="res://MyScene.tscn" id="12_2tigm"]
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/Label.gd" id="13_bqt4u"]
 [ext_resource type="PackedScene" uid="uid://b3b3m455ruk8c" path="res://Scenes/Enemies/BarrelKnight.tscn" id="14_ntqcl"]
-[ext_resource type="Script" path="res://Scenes/Levels/Level1/BarrelKnight.gd" id="15_b54ot"]
 
 [sub_resource type="SystemFont" id="SystemFont_vvs31"]
 font_names = PackedStringArray("Copperplate")
@@ -28,6 +29,22 @@ font_size = 8
 font_color = Color(1, 0.701961, 0, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ck4x"]
+shader = ExtResource("11_vnq7i")
+shader_parameter/angle = -0.2
+shader_parameter/position = -0.2
+shader_parameter/spread = 0.5
+shader_parameter/cutoff = 0.1
+shader_parameter/falloff = 0.2
+shader_parameter/edge_fade = 0.259
+shader_parameter/speed = 2.0
+shader_parameter/ray1_density = 10.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Color(0.752941, 0.701961, 0.372549, 0.8)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cvp3o"]
 vertices = PackedVector2Array(1203, -56, -316, -56, -76, -112, 1203, -295, -192, -112, -76, -137, -92, -135, -92, -137, -108, -135, -108, -137, -124, -135, -124, -137, -140, -135, -140, -137, -156, -135, -156, -137, -252, -137, -268, -135, -268, -137, -284, -135, -284, -137, -300, -135, -300, -137, -316, -135, -316, -136, -809, -323, -192, -134, -316, -112, -252, -112, -672, -136, -809, -28, -672, -28)
@@ -1384,9 +1401,11 @@ texture = ExtResource("10_2h25t")
 17:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 17:3/0/physics_layer_0/angular_velocity = 0.0
 0:4/0 = 0
+0:4/0/z_index = 10
 0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:4/0/physics_layer_0/angular_velocity = 0.0
 1:4/0 = 0
+1:4/0/z_index = 10
 1:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:4/0/physics_layer_0/angular_velocity = 0.0
 2:4/0 = 0
@@ -1459,12 +1478,15 @@ texture = ExtResource("10_2h25t")
 3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:5/0/physics_layer_0/angular_velocity = 0.0
 4:5/0 = 0
+4:5/0/z_index = 10
 4:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:5/0/physics_layer_0/angular_velocity = 0.0
 5:5/0 = 0
+5:5/0/z_index = 10
 5:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:5/0/physics_layer_0/angular_velocity = 0.0
 6:5/0 = 0
+6:5/0/z_index = 10
 6:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:5/0/physics_layer_0/angular_velocity = 0.0
 7:5/0 = 0
@@ -1504,12 +1526,15 @@ texture = ExtResource("10_2h25t")
 3:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:6/0/physics_layer_0/angular_velocity = 0.0
 4:6/0 = 0
+4:6/0/z_index = 10
 4:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:6/0/physics_layer_0/angular_velocity = 0.0
 5:6/0 = 0
+5:6/0/z_index = 10
 5:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:6/0/physics_layer_0/angular_velocity = 0.0
 6:6/0 = 0
+6:6/0/z_index = 10
 6:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:6/0/physics_layer_0/angular_velocity = 0.0
 7:6/0 = 0
@@ -1549,12 +1574,14 @@ texture = ExtResource("10_2h25t")
 3:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:7/0/physics_layer_0/angular_velocity = 0.0
 6:7/0 = 0
+6:7/0/z_index = 10
 6:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:7/0/physics_layer_0/angular_velocity = 0.0
 7:7/0 = 0
 7:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:7/0/physics_layer_0/angular_velocity = 0.0
 9:7/0 = 0
+9:7/0/z_index = 10
 9:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:7/0/physics_layer_0/angular_velocity = 0.0
 13:7/0 = 0
@@ -1567,6 +1594,7 @@ texture = ExtResource("10_2h25t")
 15:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 15:7/0/physics_layer_0/angular_velocity = 0.0
 0:8/0 = 0
+0:8/0/z_index = 10
 0:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:8/0/physics_layer_0/angular_velocity = 0.0
 1:8/0 = 0
@@ -1576,30 +1604,39 @@ texture = ExtResource("10_2h25t")
 2:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:8/0/physics_layer_0/angular_velocity = 0.0
 3:8/0 = 0
+3:8/0/z_index = 10
 3:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:8/0/physics_layer_0/angular_velocity = 0.0
 4:8/0 = 0
+4:8/0/z_index = 10
 4:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:8/0/physics_layer_0/angular_velocity = 0.0
 5:8/0 = 0
+5:8/0/z_index = 10
 5:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:8/0/physics_layer_0/angular_velocity = 0.0
 6:8/0 = 0
+6:8/0/z_index = 10
 6:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:8/0/physics_layer_0/angular_velocity = 0.0
 7:8/0 = 0
+7:8/0/z_index = 10
 7:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:8/0/physics_layer_0/angular_velocity = 0.0
 8:8/0 = 0
+8:8/0/z_index = 10
 8:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:8/0/physics_layer_0/angular_velocity = 0.0
 9:8/0 = 0
+9:8/0/z_index = 10
 9:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:8/0/physics_layer_0/angular_velocity = 0.0
 10:8/0 = 0
+10:8/0/z_index = 10
 10:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:8/0/physics_layer_0/angular_velocity = 0.0
 11:8/0 = 0
+11:8/0/z_index = 10
 11:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:8/0/physics_layer_0/angular_velocity = 0.0
 12:8/0 = 0
@@ -1618,6 +1655,7 @@ texture = ExtResource("10_2h25t")
 16:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 16:8/0/physics_layer_0/angular_velocity = 0.0
 17:8/0 = 0
+17:8/0/z_index = 10
 17:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 17:8/0/physics_layer_0/angular_velocity = 0.0
 1:9/0 = 0
@@ -1891,8 +1929,30 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_b73o2")
 
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playerNode2D")]
+position = Vector2(-300, -200)
+ignore_rotation = false
+zoom = Vector2(3, 3)
+script = ExtResource("5_hkadp")
+playerNode2D = NodePath("../Player")
+thresholdY = 300.0
+DECAY = 3
+MAX_OFFSET = Vector2(30, 0)
+MAX_ROLL = 0.0
+TRAUMA = 1.3
+
+[node name="ParallaxSpringstar" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("6_x2vk5")]
+offset_left = -360.0
+offset_top = -211.0
+offset_right = -360.0
+offset_bottom = -211.0
+scale = Vector2(1.7, 1.7)
+script = ExtResource("7_ve57k")
+NODE_TO_FOLLOW = NodePath("..")
+VELOCITY_SCALE = 0.005
+
 [node name="Player" parent="." instance=ExtResource("2_54eo4")]
-z_index = 5
+z_index = 8
 position = Vector2(-368, -205)
 collision_mask = 129
 script = ExtResource("3_iuck0")
@@ -1903,7 +1963,7 @@ RUN_SCALE = 1.5
 HEALTH_RESISTANCE = 50.0
 
 [node name="ShotgunPosition" type="Marker2D" parent="Player"]
-z_index = 6
+z_index = 1
 position = Vector2(0, 11)
 
 [node name="Shotgun" parent="Player/ShotgunPosition" instance=ExtResource("4_fv4tx")]
@@ -1934,33 +1994,20 @@ text = "%100"
 label_settings = SubResource("LabelSettings_0gytu")
 horizontal_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playerNode2D")]
-position = Vector2(-300, -200)
-ignore_rotation = false
-zoom = Vector2(3, 3)
-script = ExtResource("5_hkadp")
-playerNode2D = NodePath("../Player")
-thresholdY = 300.0
-DECAY = 3
-MAX_OFFSET = Vector2(30, 0)
-MAX_ROLL = 0.0
-TRAUMA = 1.3
-
-[node name="ParallaxSpringstar" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("6_x2vk5")]
-offset_left = -360.0
-offset_top = -211.0
-offset_right = -360.0
-offset_bottom = -211.0
-scale = Vector2(1.7, 1.7)
-script = ExtResource("7_ve57k")
-NODE_TO_FOLLOW = NodePath("..")
-VELOCITY_SCALE = 0.005
-
 [node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
+z_index = 8
+z_as_relative = false
 position = Vector2(-90, -120)
-scale = Vector2(1.4, 1.4)
-script = ExtResource("15_b54ot")
+scale = Vector2(1.7, 1.7)
 TARGET = NodePath("../Player")
+
+[node name="ColorRect" parent="." instance=ExtResource("10_i3sf2")]
+material = SubResource("ShaderMaterial_2ck4x")
+offset_left = -5.0
+offset_top = -173.0
+offset_right = 35.0
+offset_bottom = -133.0
+scale = Vector2(2, 2)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-13, -52)
@@ -1992,7 +2039,7 @@ script = ExtResource("13_bqt4u")
 camera = NodePath("../Camera2D")
 metadata/_edit_use_anchors_ = true
 
+[connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]
 [connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
 [connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Camera2D" method="_on_shotgun_weapon_fired"]
 [connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Label" method="_on_shotgun_weapon_fired"]
-[connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]

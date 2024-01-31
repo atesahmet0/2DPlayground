@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://b3b3m455ruk8c"]
+[gd_scene load_steps=31 format=3 uid="uid://b3b3m455ruk8c"]
 
+[ext_resource type="Script" path="res://Scenes/Levels/Level1/BarrelKnight.gd" id="1_n7rnf"]
 [ext_resource type="Texture2D" uid="uid://yasdqju8gyus" path="res://tiles/Enemies/Barrel Knight/Knight_anin.png" id="2_8uvmb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uuhsh"]
@@ -212,15 +213,20 @@ radius = 8.0
 height = 18.0
 
 [node name="BarrelKnight" type="CharacterBody2D"]
+script = ExtResource("1_n7rnf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(18, -5)
 sprite_frames = SubResource("SpriteFrames_6sqgf")
-animation = &"attack1"
-frame_progress = 0.15636
+animation = &"death"
+frame = 3
+frame_progress = 0.826542
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(19, -5)
 shape = SubResource("CapsuleShape2D_jsurw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

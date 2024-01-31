@@ -2,36 +2,36 @@ extends CharacterBody2D
 
 signal died(object)
 
+enum STATE {RUN, HIT, JUMP, DEAD, IDLE}
+
 @export var HEALTH: int = 100
 @export var TARGET: Node2D
 @export var SPEED: float = 50
 @export var GRAVITY_SCALE: float = 5
 @export var JUMP_SCALE: float = 400
 
-@export_category("Momentum")
-@export var MOMENTUM_SCALE: float = 200
-
-var hit_blood_scene = preload("res://Scenes/MushroomHitBlood.tscn")
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_health: float = 0
+var current_state: STATE = STATE.IDLE
+
 func _ready():
 	current_health = HEALTH
 
 var hit_animation = false
 func _process(delta):
-	if is_dead:
-		return
-	
-	if is_dying:
-		$AnimatedSprite2D.play("dead")
-	elif velocity.is_zero_approx():
-		$AnimatedSprite2D.play("idle")
-	else:
-		$AnimatedSprite2D.play("run")
-	
+	# Handle animation
+	match current_state:
+		STATE.DEAD:
+			pass
+		STATE.IDLE:
+			$AnimatedSprite2D.play("idle")
+		STATE.RUN:
+			$AnimatedSprite2D.play("run")
+		STATE.HIT:
+			$AnimatedSprite2D.play("attack1")
+	print("KNIGHT PROCESS CALLED")
 	# Handle direction
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
@@ -42,7 +42,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	# If dead don't move
-	if is_dead or is_dying:
+	if current_state == STATE.DEAD:
 		return
 	
 	var next_path_position = $NavigationAgent2D.get_next_path_position()
@@ -66,7 +66,7 @@ func actor_setup():
 var bullet_count = 0
 func bullet_hit(bullet: RigidBody2D):
 	# If dead don't do anything
-	if is_dying or is_dead:
+	if current_state == STATE.DEAD:
 		return
 	
 	# Handle health
@@ -78,17 +78,11 @@ func bullet_hit(bullet: RigidBody2D):
 		die()
 	bullet.queue_free()
 
-var is_dying = false
-var is_dead = false
+
 func die():
 	died.emit(self)
-	is_dying = true
-	queue_free()
+	current_state = STATE.DEAD
+	$AnimatedSprite2D.play("death")
+	$CollisionShape2D.set_deferred("disabled", true)
 
-func _on_animated_sprite_2d_animation_looped():
-	hit_animation = false
-	if is_dying:
-		if not is_dead:
-			is_dead = true
-			queue_free()
 
