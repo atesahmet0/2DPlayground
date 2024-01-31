@@ -67,7 +67,7 @@ func _physics_process(_delta):
 			jump_count += 1
 		elif jump_count == 1:
 			# Double jump
-			if velocity.y > 0:
+			if velocity.y < 0:
 				velocity.y = 0
 			velocity.y += JUMP_STRENGTH
 			is_double_jumping = true
