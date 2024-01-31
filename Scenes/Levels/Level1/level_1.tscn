@@ -1947,18 +1947,19 @@ MAX_ROLL = 0.0
 
 [node name="ParallaxSpringstar" parent="Camera2D" node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("6_x2vk5")]
 offset_left = -323.0
-offset_top = -183.0
+offset_top = -211.0
 offset_right = -323.0
-offset_bottom = -183.0
+offset_bottom = -211.0
 scale = Vector2(1.7, 1.7)
 script = ExtResource("7_ve57k")
 NODE_TO_FOLLOW = NodePath("..")
 VELOCITY_SCALE = 0.005
 
-[node name="BarrelKnight" parent="." instance=ExtResource("14_ntqcl")]
+[node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
 position = Vector2(-90, -120)
 scale = Vector2(1.4, 1.4)
 script = ExtResource("15_b54ot")
+TARGET = NodePath("../Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-13, -52)

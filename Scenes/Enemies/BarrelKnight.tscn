@@ -217,7 +217,7 @@ height = 18.0
 position = Vector2(18, -5)
 sprite_frames = SubResource("SpriteFrames_6sqgf")
 animation = &"attack1"
-frame_progress = 0.215152
+frame_progress = 0.15636
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(19, -5)

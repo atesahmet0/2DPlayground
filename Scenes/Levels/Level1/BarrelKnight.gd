@@ -27,9 +27,6 @@ func _process(delta):
 	
 	if is_dying:
 		$AnimatedSprite2D.play("dead")
-	elif x_momentum > 1 or hit_animation:
-		hit_animation = true
-		$AnimatedSprite2D.play("take_hit")
 	elif velocity.is_zero_approx():
 		$AnimatedSprite2D.play("idle")
 	else:
@@ -43,19 +40,13 @@ func _process(delta):
 	
 	call_deferred("actor_setup")
 
-var x_momentum = 0
 func _physics_process(delta):
 	# If dead don't move
 	if is_dead or is_dying:
 		return
 	
 	var next_path_position = $NavigationAgent2D.get_next_path_position()
-	
 	velocity = global_position.direction_to(next_path_position) * SPEED
-
-	# Handle x momentum
-	velocity += -velocity.normalized() * x_momentum * MOMENTUM_SCALE
-	x_momentum = 0
 	
 	if not is_on_floor():
 		velocity.y += gravity * GRAVITY_SCALE
@@ -83,23 +74,9 @@ func bullet_hit(bullet: RigidBody2D):
 	if current_health < 0:
 		current_health = 0
 	
-	# Handle knockback
-	x_momentum += log(bullet.linear_velocity.length())
 	if current_health <= 0:
 		die()
 	bullet.queue_free()
-	
-	# Set Health Label
-	var label_text = "%" + str(int((current_health / HEALTH)* 100))
-	$HealthLabel.text = label_text 
-	
-	# Add blood particles
-	var hit_position = bullet.position
-	var hit_velocity = bullet.linear_velocity
-	
-	var blood = hit_blood_scene.instantiate()
-	blood.start(hit_position, hit_velocity)
-	get_parent().add_child(blood)
 
 var is_dying = false
 var is_dead = false

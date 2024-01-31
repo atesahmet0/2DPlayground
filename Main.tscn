@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bic1iprk28xju"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_rf6ay"]
+[ext_resource type="AudioStream" uid="uid://j3ftcnskjmy8" path="res://sounds/Three Red Hearts - Modern Bits.ogg" id="3_ugkpy"]
 [ext_resource type="PackedScene" uid="uid://dh7hrlufueci2" path="res://Scenes/MainMenu/MainMenu.tscn" id="13_6k0co"]
-[ext_resource type="AudioStream" uid="uid://dw5stfby4kf1c" path="res://sounds/background_song.mp3" id="14_ov4yh"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rf6ay")
@@ -10,7 +10,7 @@ script = ExtResource("1_rf6ay")
 [node name="MainMenu" parent="." instance=ExtResource("13_6k0co")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_ov4yh")
+stream = ExtResource("3_ugkpy")
 autoplay = true
 
 [connection signal="exit_clicked" from="MainMenu" to="." method="_on_main_menu_exit_clicked"]
