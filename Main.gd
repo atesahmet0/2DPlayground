@@ -1,6 +1,6 @@
 extends Node
 
-var level1 = preload("res://Scenes/Levels/level_1.tscn")
+var level1 = preload("res://Scenes/Levels/Level1/level_1.tscn")
 var current_level: Node = null
 var is_game_started = false
 
@@ -35,6 +35,6 @@ func set_level(level):
 		current_level.queue_free()
 	# Create new level
 	var new_level = level.instantiate()
-	add_child(new_level)
+	call_deferred("add_child", new_level)
 	new_level.character_died.connect(_on_character_died)
 	current_level = new_level
