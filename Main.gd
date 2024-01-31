@@ -35,6 +35,6 @@ func set_level(level):
 		current_level.queue_free()
 	# Create new level
 	var new_level = level.instantiate()
-	add_child(new_level)
+	call_deferred("add_child", new_level)
 	new_level.character_died.connect(_on_character_died)
 	current_level = new_level

@@ -55,6 +55,7 @@ metadata/_edit_group_ = true
 
 [node name="Sky" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_mar5i")
+layout_mode = 0
 offset_right = 430.0
 offset_bottom = 240.0
 texture = ExtResource("1_4b44m")
@@ -62,6 +63,7 @@ stretch_mode = 1
 
 [node name="Sky2" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_qaplv")
+layout_mode = 0
 offset_top = 30.0
 offset_right = 430.0
 offset_bottom = 270.0
@@ -70,6 +72,7 @@ stretch_mode = 1
 
 [node name="Sky3" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_xytjp")
+layout_mode = 0
 offset_top = 39.0
 offset_right = 430.0
 offset_bottom = 279.0
