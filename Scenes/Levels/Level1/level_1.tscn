@@ -1883,7 +1883,7 @@ oversampling = 10.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_lfdy4"]
 font = SubResource("SystemFont_yu5rx")
-font_size = 8
+font_size = 24
 font_color = Color(0.870588, 0, 0.117647, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
@@ -1957,9 +1957,10 @@ VELOCITY_SCALE = 0.005
 
 [node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
 position = Vector2(-90, -120)
-scale = Vector2(1.4, 1.4)
+scale = Vector2(1.7, 1.7)
 script = ExtResource("15_b54ot")
 TARGET = NodePath("../Player")
+SPEED = 70.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-13, -52)
@@ -1978,10 +1979,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -101.0
-offset_right = -35.0
-offset_bottom = -92.0
+offset_left = -89.0
+offset_top = -64.0
+offset_right = -16.0
+offset_bottom = -47.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
