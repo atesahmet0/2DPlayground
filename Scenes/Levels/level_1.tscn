@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=30 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level_1.gd" id="1_srdxa"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="1_u106e"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://chhweelovr07g" path="res://tiles/Terrain/Terrain (16x16).png" id="8_h3501"]
 [ext_resource type="Texture2D" uid="uid://baealhafxg5ot" path="res://TileSets.png" id="9_7iv7s"]
 [ext_resource type="PackedScene" uid="uid://chsw4ofwr20ts" path="res://MyScene.tscn" id="10_ubtlp"]
-[ext_resource type="PackedScene" uid="uid://dfgkc3qst5hrk" path="res://Scenes/Mushroom.tscn" id="11_8i3v4"]
 [ext_resource type="Texture2D" uid="uid://di0tub401r147" path="res://tiles/Terrain/stringstar_fields.png" id="11_hjq4d"]
 
 [sub_resource type="SystemFont" id="SystemFont_vvs31"]
@@ -1403,26 +1402,31 @@ texture = ExtResource("11_hjq4d")
 5:4/0/physics_layer_0/angular_velocity = 0.0
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -3.5, 8, -3.5, 8, -7.5)
 5:4/0/physics_layer_0/polygon_0/one_way = true
+5:4/0/physics_layer_0/polygon_0/one_way_margin = 0.5
 6:4/0 = 0
 6:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:4/0/physics_layer_0/angular_velocity = 0.0
 6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -3.5, 8, -3.5, 8, -7.5)
 6:4/0/physics_layer_0/polygon_0/one_way = true
+6:4/0/physics_layer_0/polygon_0/one_way_margin = 0.5
 7:4/0 = 0
 7:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:4/0/physics_layer_0/angular_velocity = 0.0
 7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -3.5, 8, -3.5, 8, -7.5)
 7:4/0/physics_layer_0/polygon_0/one_way = true
+7:4/0/physics_layer_0/polygon_0/one_way_margin = 0.5
 8:4/0 = 0
 8:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:4/0/physics_layer_0/angular_velocity = 0.0
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -3.5, 8, -3.5, 8, -7.5)
 8:4/0/physics_layer_0/polygon_0/one_way = true
+8:4/0/physics_layer_0/polygon_0/one_way_margin = 0.5
 9:4/0 = 0
 9:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:4/0/physics_layer_0/angular_velocity = 0.0
 9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -3.5, 8, -3.5, 8, -7.5)
 9:4/0/physics_layer_0/polygon_0/one_way = true
+9:4/0/physics_layer_0/polygon_0/one_way_margin = 0.5
 11:4/0 = 0
 11:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:4/0/physics_layer_0/angular_velocity = 0.0
@@ -1979,52 +1983,6 @@ label_settings = SubResource("LabelSettings_lfdy4")
 script = ExtResource("6_yusku")
 camera = NodePath("../Camera2D")
 metadata/_edit_use_anchors_ = true
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-position = Vector2(-360, -400)
-enabled = false
-color = Color(0.6, 0.584314, 0.0901961, 1)
-energy = 0.25
-
-[node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
-[node name="FlyingEyeSpawnBox" type="Node2D" parent="."]
-position = Vector2(753, -416)
-
-[node name="Mushroom1" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("11_8i3v4")]
-position = Vector2(1384, -518)
-scale = Vector2(4, 4)
-HEALTH = 50
-TARGET = NodePath("../Player")
-SPEED = 100.0
-JUMP_SCALE = 2000.0
-MOMENTUM_SCALE = 400.0
-
-[node name="Mushroom2" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("11_8i3v4")]
-position = Vector2(2285, -518)
-scale = Vector2(4, 4)
-HEALTH = 50
-TARGET = NodePath("../Player")
-SPEED = 100.0
-JUMP_SCALE = 2000.0
-
-[node name="Mushroom3" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("11_8i3v4")]
-position = Vector2(2807, -518)
-scale = Vector2(4, 4)
-HEALTH = 50
-TARGET = NodePath("../Player")
-SPEED = 100.0
-JUMP_SCALE = 2000.0
-
-[node name="Mushroom4" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("11_8i3v4")]
-position = Vector2(3241, -518)
-scale = Vector2(4, 4)
-HEALTH = 50
-TARGET = NodePath("../Player")
-SPEED = 100.0
-JUMP_SCALE = 2000.0
 
 [connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
 [connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Label" method="_on_shotgun_weapon_fired"]
