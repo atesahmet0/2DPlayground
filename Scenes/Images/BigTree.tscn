@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctuvh3jqj2en3"]
+
+[ext_resource type="Shader" path="res://Scenes/Images/TreeSway.gdshader" id="1_02ygo"]
+[ext_resource type="Texture2D" uid="uid://di0tub401r147" path="res://tiles/Terrain/stringstar_fields.png" id="1_g0lo4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8f26n"]
+shader = ExtResource("1_02ygo")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofgn5"]
+atlas = ExtResource("1_g0lo4")
+region = Rect2(176, 8, 104, 136)
+
+[node name="TextureRect" type="TextureRect"]
+material = SubResource("ShaderMaterial_8f26n")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_ofgn5")
