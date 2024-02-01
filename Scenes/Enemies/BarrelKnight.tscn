@@ -230,9 +230,7 @@ shape = SubResource("CapsuleShape2D_aa5eo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6sqgf")
-animation = &"attack1"
-frame = 3
-frame_progress = 0.924028
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jsurw")

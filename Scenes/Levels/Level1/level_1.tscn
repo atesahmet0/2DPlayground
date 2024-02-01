@@ -1999,7 +1999,7 @@ label_settings = SubResource("LabelSettings_0gytu")
 horizontal_alignment = 1
 
 [node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
-z_index = 8
+z_index = 7
 z_as_relative = false
 position = Vector2(-90, -120)
 scale = Vector2(1.7, 1.7)

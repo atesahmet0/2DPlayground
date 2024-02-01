@@ -26,7 +26,7 @@ func _process(delta):
 	# Handle animation
 	match current_state:
 		STATE.DEAD:
-			pass
+			return
 		STATE.IDLE:
 			$AnimatedSprite2D.play("idle")
 		STATE.RUN:
@@ -66,11 +66,6 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-func jump(delta):
-	if is_on_floor():
-		# print("jump")
-		velocity = Vector2.UP * JUMP_SCALE
-	
 func actor_setup():
 	await get_tree().physics_frame
 	if TARGET:
@@ -117,4 +112,6 @@ func _on_animated_sprite_2d_frame_changed():
 	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 3:
 		# Weapon swing frame
 		attack()
-	
+	elif current_state == STATE.DEAD and $AnimatedSprite2D.get_frame() == 5:
+		# End of death animation, stop
+		$AnimatedSprite2D.pause()
