@@ -134,7 +134,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack1",
-"speed": 7.0
+"speed": 21.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -219,6 +219,9 @@ height = 18.0
 [node name="BarrelKnight" type="CharacterBody2D"]
 collision_mask = 129
 script = ExtResource("1_n7rnf")
+SPEED = 100.0
+JUMP_SCALE = -1150.0
+JUMP_THRESHOLD = 40.0
 
 [node name="SwingArea" type="Area2D" parent="."]
 collision_mask = 128
@@ -230,7 +233,9 @@ shape = SubResource("CapsuleShape2D_aa5eo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6sqgf")
-animation = &"death"
+animation = &"attack1"
+frame = 1
+frame_progress = 0.115881
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jsurw")

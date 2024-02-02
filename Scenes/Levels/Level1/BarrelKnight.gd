@@ -8,10 +8,11 @@ enum STATE {RUN, HIT, JUMP, DEAD, IDLE}
 @export var TARGET: Node2D
 @export var SPEED: float = 50
 @export var GRAVITY_SCALE: float = 5
-@export var JUMP_SCALE: float = 400
-
+@export var JUMP_SCALE: float = -1200
+# When target is above this point jump. As px.
+@export var JUMP_THRESHOLD: float = 30
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") / 100
 
 var current_health: float = 0
 var current_state: STATE = STATE.IDLE
@@ -44,11 +45,16 @@ func _process(delta):
 	
 	call_deferred("actor_setup")
 
+
 func _physics_process(delta):
 	# If dead don't move
 	if current_state == STATE.DEAD:
 		return
-		
+	
+	# Gravity
+	if not is_on_floor():
+		velocity.y += gravity * GRAVITY_SCALE
+	
 	# Handle direction of physcics objects
 	if is_flipped:
 		$SwingArea/CollisionShape2D.position.x = -10
@@ -57,19 +63,23 @@ func _physics_process(delta):
 
 	if not $NavigationAgent2D.is_target_reached():
 		var next_path_position = $NavigationAgent2D.get_next_path_position()
-		velocity = global_position.direction_to(next_path_position) * SPEED
+		# This is a vector pointing towards target
+		var desired_velocity = global_position.direction_to(next_path_position) * SPEED
+		# Make horizontal velocity constant
+		velocity.x = sign(desired_velocity.x) * SPEED
+		# If target is on top jump
+		if desired_velocity.y < 0 and global_position.y - TARGET.global_position.y > JUMP_THRESHOLD:
+			jump()
 		current_state = STATE.RUN
 	
-	# Gravity
-	if not is_on_floor():
-		velocity.y += gravity * GRAVITY_SCALE
-	
 	move_and_slide()
+
 
 func actor_setup():
 	await get_tree().physics_frame
 	if TARGET:
 		$NavigationAgent2D.target_position = TARGET.global_position
+
 
 var bullet_count = 0
 func bullet_hit(bullet: RigidBody2D):
@@ -93,6 +103,7 @@ func die():
 	$AnimatedSprite2D.play("death")
 	$CollisionShape2D.set_deferred("disabled", true)
 
+
 # Reached target, attack
 func _on_navigation_agent_2d_target_reached():
 	current_state = STATE.HIT
@@ -108,8 +119,15 @@ func attack():
 				body.got_hit()
 
 
+# Only call in physics frames
+func jump():
+	if is_on_floor():
+		velocity.y += JUMP_SCALE
+	
+	
+
 func _on_animated_sprite_2d_frame_changed():
-	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 3:
+	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 4:
 		# Weapon swing frame
 		attack()
 	elif current_state == STATE.DEAD and $AnimatedSprite2D.get_frame() == 5:
