@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://di0tub401r147" path="res://tiles/Terrain/stringstar_fields.png" id="1_g0lo4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8f26n"]
+resource_local_to_scene = true
 shader = ExtResource("1_02ygo")
 shader_parameter/speed = 1.0
 shader_parameter/minStrength = 0.05
@@ -19,7 +20,7 @@ shader_parameter/offset = 0.0
 atlas = ExtResource("1_g0lo4")
 region = Rect2(176, 8, 104, 136)
 
-[node name="TextureRect" type="TextureRect"]
+[node name="BigTree" type="TextureRect"]
 material = SubResource("ShaderMaterial_8f26n")
 offset_right = 40.0
 offset_bottom = 40.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=38 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/Label.gd" id="13_bqt4u"]
 [ext_resource type="PackedScene" uid="uid://b3b3m455ruk8c" path="res://Scenes/Enemies/BarrelKnight.tscn" id="14_ntqcl"]
 [ext_resource type="PackedScene" uid="uid://ctuvh3jqj2en3" path="res://Scenes/Images/BigTree.tscn" id="17_apm5f"]
+[ext_resource type="Shader" path="res://Scenes/Images/TreeSway.gdshader" id="18_bi5st"]
 
 [sub_resource type="SystemFont" id="SystemFont_vvs31"]
 font_names = PackedStringArray("Copperplate")
@@ -1927,6 +1928,19 @@ font_color = Color(0.870588, 0, 0.117647, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e33av"]
+resource_local_to_scene = true
+shader = ExtResource("18_bi5st")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q4564"]
 normal = Vector2(1, 0)
 
@@ -2044,6 +2058,7 @@ camera = NodePath("../Camera2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" parent="." instance=ExtResource("17_apm5f")]
+material = SubResource("ShaderMaterial_e33av")
 offset_left = -67.0
 offset_top = -244.0
 offset_right = 45.0
