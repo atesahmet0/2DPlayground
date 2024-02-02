@@ -2,29 +2,35 @@ extends CharacterBody2D
 
 signal character_died
 
+enum STATE {WALK, RUN, JUMP, FALL, DASH, IDLE}
+
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 100
 
 # When characte's y value is lesser than this character felt to void.
 @export var void_beginning: float = 5000
 
 @export_category("Player Properties")
-@export var WALK_SPEED = 500
-@export var JUMP_STRENGTH = -1800
-@export var GRAVITY_SCALE: float = 10
-@export var RUN_SCALE: float = 2
+@export var WALK_SPEED = 200
+@export var JUMP_STRENGTH = -650
+@export var GRAVITY_SCALE: float = 2
+@export var RUN_SCALE: float = 1.5
 @export var HEALTH: float = 100
-@export var HEALTH_RESISTANCE: float = 1
-
+@export var HEALTH_RESISTANCE: float = 50
+# As milisecond
+@export var DASH_DURATION: float = 100
 
 var left_most_x_position: float = -999999
 var current_health = 0
+var current_state = STATE.IDLE
+var jump_count = 0
+var is_running = false
+var is_double_jumping = false
+var last_dash_time = 0
+
 func _ready():
 	current_health = HEALTH
 	$AnimatedSprite2D.play("idle")
 
-var jump_count = 0
-var is_running = false
-var is_double_jumping = false
 func _physics_process(_delta):
 	# Handle gravity
 	var gravity = GRAVITY_SCALE * GRAVITY
@@ -38,8 +44,14 @@ func _physics_process(_delta):
 	if position.x < left_most_x_position:
 		position.x = left_most_x_position
 	
+	# Finish dash after duration ends
+	if Time.get_ticks_msec() - last_dash_time > DASH_DURATION:
+		current_state = STATE.IDLE
+	
 	# Handle horizontal movement
-	if Input.is_action_pressed("move_right"):
+	if current_state == STATE.DASH:
+		pass
+	elif Input.is_action_pressed("move_right"):
 		velocity.x = WALK_SPEED
 	elif Input.is_action_pressed("move_left"):
 		velocity.x = -WALK_SPEED
@@ -47,11 +59,11 @@ func _physics_process(_delta):
 		velocity.x = 0
 		
 	# Handle runing
-	if Input.is_action_pressed("move_run"):
-		velocity.x *= RUN_SCALE
-		is_running = true
-	else:
-		is_running = false
+	if Input.is_action_pressed("move_run") and current_state == STATE.WALK:
+		current_state = STATE.RUN
+	
+	if current_state == STATE.RUN:
+		velocity.x *= 2
 
 	# Handle jump
 	if is_on_floor():
@@ -66,6 +78,10 @@ func _physics_process(_delta):
 			velocity.y += JUMP_STRENGTH
 			jump_count += 1
 		elif jump_count == 1:
+			# Disable double jump. Code related to double jump may be deleted
+			# in future versions
+			return
+			
 			# Double jump
 			if velocity.y < 0:
 				velocity.y = 0
@@ -75,7 +91,13 @@ func _physics_process(_delta):
 			jump_count += 1
 
 	if Input.is_action_pressed("move_down"):
-		velocity.y = 30 * gravity
+		if velocity.y < 0:
+			velocity.y = 30 * gravity
+	
+	if Input.is_action_just_pressed("move_dash") and current_state != STATE.DASH:
+		current_state = STATE.DASH
+		last_dash_time = Time.get_ticks_msec()
+		velocity.x *= 1 + ((DASH_DURATION - Time.get_ticks_msec() + last_dash_time) / DASH_DURATION * 3)
 	
 	# Get down from platform
 	if Input.is_action_just_pressed("move_down") and is_on_floor():
@@ -123,6 +145,9 @@ func handle_animation():
 	
 	if is_double_jumping and velocity.y < 0:
 		current_animation = "double_jump"
+	
+	if current_state == STATE.DASH:
+		current_animation = "dash"
 	
 	$AnimatedSprite2D.play(current_animation)
 	$AnimatedSprite2D.flip_h = hflip

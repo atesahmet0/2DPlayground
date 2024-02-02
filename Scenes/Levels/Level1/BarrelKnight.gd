@@ -7,8 +7,8 @@ enum STATE {RUN, HIT, JUMP, DEAD, IDLE}
 @export var HEALTH: int = 100
 @export var TARGET: Node2D
 @export var SPEED: float = 50
-@export var GRAVITY_SCALE: float = 5
-@export var JUMP_SCALE: float = -1200
+@export var GRAVITY_SCALE: float = 2
+@export var JUMP_SCALE: float = -700
 # When target is above this point jump. As px.
 @export var JUMP_THRESHOLD: float = 30
 # Time between consecutive jumps
@@ -147,7 +147,6 @@ func jump():
 		velocity.y += JUMP_SCALE
 	
 	
-
 func _on_animated_sprite_2d_frame_changed():
 	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 4:
 		# Weapon swing frame

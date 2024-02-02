@@ -81,8 +81,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_at37l")
 }],
 "loop": true,
-"name": &"double_jump",
-"speed": 12.0
+"name": &"dash",
+"speed": 21.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -146,5 +146,6 @@ shape = SubResource("CapsuleShape2D_n72ou")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i7fse")
-animation = &"idle"
-frame_progress = 0.777968
+animation = &"dash"
+frame = 3
+frame_progress = 0.656126

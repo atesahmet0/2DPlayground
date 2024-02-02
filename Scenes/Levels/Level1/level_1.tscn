@@ -1978,11 +1978,6 @@ z_index = 8
 position = Vector2(-368, -205)
 collision_mask = 257
 script = ExtResource("3_iuck0")
-WALK_SPEED = 200
-JUMP_STRENGTH = -550
-GRAVITY_SCALE = 2.0
-RUN_SCALE = 1.5
-HEALTH_RESISTANCE = 50.0
 
 [node name="ShotgunPosition" type="Marker2D" parent="Player"]
 z_index = 1
@@ -2031,6 +2026,7 @@ z_as_relative = false
 position = Vector2(-90, -120)
 scale = Vector2(1.7, 1.7)
 TARGET = NodePath("../Player")
+JUMP_SCALE = -700.0
 
 [node name="ColorRect" parent="." instance=ExtResource("10_i3sf2")]
 material = SubResource("ShaderMaterial_2ck4x")
