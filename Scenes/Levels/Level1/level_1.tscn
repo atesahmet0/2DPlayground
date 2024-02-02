@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=39 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -31,6 +31,9 @@ font_size = 8
 font_color = Color(1, 0.701961, 0, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nk62"]
+size = Vector2(18, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ck4x"]
 shader = ExtResource("11_vnq7i")
@@ -1973,7 +1976,7 @@ VELOCITY_SCALE = 0.005
 [node name="Player" parent="." instance=ExtResource("2_54eo4")]
 z_index = 8
 position = Vector2(-368, -205)
-collision_mask = 129
+collision_mask = 257
 script = ExtResource("3_iuck0")
 WALK_SPEED = 200
 JUMP_STRENGTH = -550
@@ -2012,6 +2015,15 @@ grow_vertical = 0
 text = "%100"
 label_settings = SubResource("LabelSettings_0gytu")
 horizontal_alignment = 1
+
+[node name="StackPrevent" type="StaticBody2D" parent="Player"]
+position = Vector2(0, -3)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/StackPrevent"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_2nk62")
 
 [node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
 z_index = 7

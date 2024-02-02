@@ -11,6 +11,9 @@ enum STATE {RUN, HIT, JUMP, DEAD, IDLE}
 @export var JUMP_SCALE: float = -1200
 # When target is above this point jump. As px.
 @export var JUMP_THRESHOLD: float = 30
+# Time between consecutive jumps
+@export var JUMP_DELAY: float = 2000
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") / 100
 
@@ -35,7 +38,9 @@ func _process(delta):
 		STATE.HIT:
 			$AnimatedSprite2D.play("attack1")
 	
-	is_flipped = TARGET.global_position.x < global_position.x
+	# Only update when target is not reached to avoid jittering
+	if not $NavigationAgent2D.is_target_reached():
+		is_flipped = TARGET.global_position.x < global_position.x
 
 	# Handle direction of sprites
 	if is_flipped:
@@ -46,6 +51,8 @@ func _process(delta):
 	call_deferred("actor_setup")
 
 
+# If jump order is given for a whole interval then jump. If order is not present -1
+var first_jump_order = -1
 func _physics_process(delta):
 	# If dead don't move
 	if current_state == STATE.DEAD:
@@ -65,12 +72,27 @@ func _physics_process(delta):
 		var next_path_position = $NavigationAgent2D.get_next_path_position()
 		# This is a vector pointing towards target
 		var desired_velocity = global_position.direction_to(next_path_position) * SPEED
-		# Make horizontal velocity constant
-		velocity.x = sign(desired_velocity.x) * SPEED
+		# Make horizontal velocity constant. If velocity.x is small don't move to avoid jittering
+		velocity.x = sign(desired_velocity.x) * SPEED if abs(desired_velocity.x) > 10 else 0
+		print("Desired velocity x: " + str(desired_velocity.x))
 		# If target is on top jump
 		if desired_velocity.y < 0 and global_position.y - TARGET.global_position.y > JUMP_THRESHOLD:
-			jump()
+			if first_jump_order == -1:
+				first_jump_order = Time.get_ticks_msec()
+			if Time.get_ticks_msec() - first_jump_order > JUMP_DELAY:
+				jump()
+				first_jump_order = -1
+		else:
+			first_jump_order = -1
+		# Target is down and we are jumping so stop jump motion
+		if desired_velocity.y > 0 and velocity.y < 0:
+			# velocity.y = 0
+			pass
 		current_state = STATE.RUN
+	
+	print("Velocity is: " + str(velocity.x))
+	if current_state != STATE.HIT and is_zero_approx(velocity.x):
+		current_state = STATE.IDLE
 	
 	move_and_slide()
 
