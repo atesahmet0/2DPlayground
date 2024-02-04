@@ -1,0 +1,4 @@
+Implement robust weapon system.
+Add shield etc to barrel knight
+Add trail to dash animation
+Make barrel knight attack when player is in range(Instead of attacking when it reaches player)
