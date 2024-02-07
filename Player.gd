@@ -49,6 +49,8 @@ func _physics_process(_delta):
 		current_state = STATE.IDLE
 	
 	# Handle horizontal movement
+	
+	# Ignore movement whilst dash
 	if current_state == STATE.DASH:
 		pass
 	elif Input.is_action_pressed("move_right"):
@@ -66,36 +68,20 @@ func _physics_process(_delta):
 	
 	if current_state == STATE.RUN:
 		velocity.x *= 2
-
+	
 	# Handle jump
-	if is_on_floor():
-		jump_count = 0
-		is_double_jumping = false
+	if Input.is_action_just_pressed("move_jump") and is_on_floor():
+		velocity.y += JUMP_STRENGTH
+		current_state = STATE.JUMP
+	
+	if velocity.y < 0:
+		if not Input.is_action_pressed("move_jump") and not Input.is_action_just_pressed("move_jump"):
+			# If moving up and jump button released then don't jump anymore
+			velocity.y /= 4 
+	
+	if Input.is_action_just_pressed("move_down"):
+			velocity.y = 60 * GRAVITY
 		
-	if Input.is_action_just_pressed("move_jump"):
-		if jump_count == 0:
-			# Normal jump
-			if velocity.y > 0:
-				velocity.y = 0
-			velocity.y += JUMP_STRENGTH
-			jump_count += 1
-		elif jump_count == 1:
-			# Disable double jump. Code related to double jump may be deleted
-			# in future versions
-			return
-			
-			# Double jump
-			if velocity.y < 0:
-				velocity.y = 0
-			velocity.y += JUMP_STRENGTH
-			is_double_jumping = true
-	
-			jump_count += 1
-
-	if Input.is_action_pressed("move_down"):
-		if velocity.y < 0:
-			velocity.y = 30 * gravity
-	
 	if Input.is_action_just_pressed("move_dash") and current_state != STATE.DASH:
 		current_state = STATE.DASH
 		last_dash_time = Time.get_ticks_msec()
@@ -114,6 +100,7 @@ func _process(delta):
 	$HealthLabel.text = str(3 - hit_count)
 	
 	handle_animation()
+
 
 func handle_animation():
 	var current_animation

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=46 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -1947,6 +1947,19 @@ shader_parameter/distortion = 0.0
 shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sof42"]
+resource_local_to_scene = true
+shader = ExtResource("18_bi5st")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_setta"]
 atlas = ExtResource("10_2h25t")
 region = Rect2(80, 64, 80, 16)
@@ -2012,6 +2025,8 @@ z_index = 8
 position = Vector2(-368, -205)
 collision_mask = 257
 script = ExtResource("3_iuck0")
+JUMP_STRENGTH = -500
+GRAVITY_SCALE = 1.0
 
 [node name="ShotgunPosition" type="Marker2D" parent="Player"]
 z_index = 1
@@ -2101,7 +2116,7 @@ scale = Vector2(2, 2)
 [node name="BigTree2" parent="NavigationRegion2D/TileMap" instance=ExtResource("17_apm5f")]
 z_index = 1
 z_as_relative = false
-material = SubResource("ShaderMaterial_kadh3")
+material = SubResource("ShaderMaterial_sof42")
 offset_left = 880.0
 offset_top = -304.0
 offset_right = 992.0
