@@ -148,7 +148,7 @@ func jump():
 	
 	
 func _on_animated_sprite_2d_frame_changed():
-	if current_state == STATE.HIT and $AnimatedSprite2D.get_frame() == 4:
+	if current_state == STATE.HIT and ($AnimatedSprite2D.get_frame() == 4 or $AnimatedSprite2D.get_frame() == 11):
 		# Weapon swing frame
 		attack()
 	elif current_state == STATE.DEAD and $AnimatedSprite2D.get_frame() == 5:

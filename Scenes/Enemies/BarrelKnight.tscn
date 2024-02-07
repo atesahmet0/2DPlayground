@@ -1,35 +1,71 @@
-[gd_scene load_steps=32 format=3 uid="uid://b3b3m455ruk8c"]
+[gd_scene load_steps=45 format=3 uid="uid://b3b3m455ruk8c"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/BarrelKnight.gd" id="1_n7rnf"]
 [ext_resource type="Texture2D" uid="uid://yasdqju8gyus" path="res://tiles/Enemies/Barrel Knight/Knight_anin.png" id="2_8uvmb"]
+[ext_resource type="Texture2D" uid="uid://c6ul60p32fipo" path="res://tiles/Enemies/Barrel Knight/BarrelKnightSourceImage.png" id="2_s37tv"]
+[ext_resource type="PackedScene" uid="uid://ccuj2wwbhvg2s" path="res://Shield.tscn" id="4_5hgbc"]
+[ext_resource type="Shader" path="res://Shield.gdshader" id="5_pyxev"]
+[ext_resource type="Texture2D" uid="uid://doji8rlg1bya8" path="res://tiles/circular_bar.png" id="6_v4akm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aa5eo"]
 radius = 5.0
 height = 28.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uuhsh"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(16, 144, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt5ar"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(0, 128, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tle15"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(64, 144, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f77fy"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(48, 128, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_suvbs"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(112, 144, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc3n8"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(96, 128, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pd07y"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(144, 144, 48, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfs3y"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(144, 128, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kmjng"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(192, 144, 48, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsdae"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(192, 128, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y5r8k"]
-atlas = ExtResource("2_8uvmb")
-region = Rect2(240, 144, 48, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nqua"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(240, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nms6"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(288, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcc2h"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(336, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2me61"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(384, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7p3l"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(432, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0h3q"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(480, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p87x"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(528, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8iwl"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(576, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulpn3"]
+atlas = ExtResource("2_s37tv")
+region = Rect2(624, 128, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lt7sw"]
 atlas = ExtResource("2_8uvmb")
@@ -115,26 +151,50 @@ region = Rect2(304, 48, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uuhsh")
+"texture": SubResource("AtlasTexture_yt5ar")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tle15")
+"texture": SubResource("AtlasTexture_f77fy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_suvbs")
+"texture": SubResource("AtlasTexture_lc3n8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pd07y")
+"texture": SubResource("AtlasTexture_qfs3y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kmjng")
+"texture": SubResource("AtlasTexture_lsdae")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y5r8k")
+"texture": SubResource("AtlasTexture_8nqua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nms6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcc2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2me61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7p3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0h3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p87x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8iwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulpn3")
 }],
 "loop": true,
 "name": &"attack1",
-"speed": 21.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -216,6 +276,11 @@ animations = [{
 radius = 8.0
 height = 18.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jhye"]
+resource_local_to_scene = true
+shader = ExtResource("5_pyxev")
+shader_parameter/color = Color(0.423529, 0.654902, 1, 1)
+
 [node name="BarrelKnight" type="CharacterBody2D"]
 collision_layer = 256
 collision_mask = 129
@@ -235,15 +300,47 @@ shape = SubResource("CapsuleShape2D_aa5eo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6sqgf")
 animation = &"attack1"
-frame = 1
-frame_progress = 0.115881
+frame_progress = 0.370144
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jsurw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0
-debug_enabled = true
+
+[node name="Shield" parent="." instance=ExtResource("4_5hgbc")]
+material = SubResource("ShaderMaterial_0jhye")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CircularBar" type="TextureProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 24.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+step = 0.01
+value = 30.0
+fill_mode = 4
+texture_under = ExtResource("6_v4akm")
+texture_progress = ExtResource("6_v4akm")
+tint_under = Color(0.827451, 0.658824, 0.027451, 0.478431)
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

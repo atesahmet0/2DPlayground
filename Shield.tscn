@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccuj2wwbhvg2s"]
+
+[ext_resource type="Shader" path="res://Shield.gdshader" id="1_poxby"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_22015"]
+resource_local_to_scene = true
+shader = ExtResource("1_poxby")
+shader_parameter/color = Color(0.423529, 0.654902, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_yt7y3"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cxeb1"]
+gradient = SubResource("Gradient_yt7y3")
+width = 16
+
+[node name="Shield" type="TextureRect"]
+material = SubResource("ShaderMaterial_22015")
+offset_right = 480.0
+offset_bottom = 480.0
+texture = SubResource("GradientTexture1D_cxeb1")
