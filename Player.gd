@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal character_died
 
-enum STATE {WALK, RUN, JUMP, FALL, DASH, IDLE}
+enum STATE {WALK, RUN, JUMP, FALL, DASH, IDLE, DEAD}
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 100
 
@@ -53,8 +53,10 @@ func _physics_process(_delta):
 		pass
 	elif Input.is_action_pressed("move_right"):
 		velocity.x = WALK_SPEED
+		current_state = STATE.WALK
 	elif Input.is_action_pressed("move_left"):
 		velocity.x = -WALK_SPEED
+		current_state = STATE.WALK
 	else:
 		velocity.x = 0
 		
@@ -153,6 +155,7 @@ func handle_animation():
 	$AnimatedSprite2D.flip_h = hflip
 
 func died():
+	current_state = STATE.DEAD
 	is_dead = true
 	character_died.emit()
 	

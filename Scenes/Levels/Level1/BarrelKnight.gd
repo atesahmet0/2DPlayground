@@ -38,6 +38,9 @@ func _process(delta):
 		STATE.HIT:
 			$AnimatedSprite2D.play("attack1")
 	
+	# TODO delete later
+	$CircularBar.value = Time.get_ticks_msec() / 5 % 100
+	
 	# Only update when target is not reached to avoid jittering
 	if not $NavigationAgent2D.is_target_reached():
 		is_flipped = TARGET.global_position.x < global_position.x

@@ -2060,7 +2060,7 @@ offset_left = 77.0
 offset_top = -124.0
 offset_right = 295.0
 offset_bottom = -75.0
-text = "You can dash while mid-air"
+text = "You can dash whilst mid-air"
 label_settings = SubResource("LabelSettings_ctfr3")
 
 [node name="InitialLabel" type="Label" parent="NavigationRegion2D/Labels"]
