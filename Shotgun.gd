@@ -2,6 +2,7 @@ extends Node2D
 
 signal weapon_fired(current_ammo: int)
 
+@export var INITIAL_AMMO_COUNT: int = 0
 @export_category("Bullet Properties")
 # BUllets will be deleted after this.
 @export var BULLET_LIFE_TIME: float = 5
@@ -29,7 +30,7 @@ var bullet_scene = preload("res://ShotgunBullet.tscn")
 var shell_scene = preload("res://ShotgunShell.tscn")
 
 # Ammo left in the gun
-var current_ammo: int = 5
+var current_ammo: int = INITIAL_AMMO_COUNT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
