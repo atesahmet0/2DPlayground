@@ -73,8 +73,17 @@ stretch_mode = 1
 [node name="Sky3" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_xytjp")
 layout_mode = 0
-offset_top = 39.0
+offset_top = 48.0
 offset_right = 430.0
-offset_bottom = 279.0
+offset_bottom = 288.0
+texture = ExtResource("3_3hoy3")
+stretch_mode = 1
+
+[node name="Sky4" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_xytjp")
+layout_mode = 0
+offset_top = 59.0
+offset_right = 430.0
+offset_bottom = 299.0
 texture = ExtResource("3_3hoy3")
 stretch_mode = 1
