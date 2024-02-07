@@ -2043,10 +2043,10 @@ JUMP_SCALE = -700.0
 
 [node name="ColorRect" parent="." instance=ExtResource("10_i3sf2")]
 material = SubResource("ShaderMaterial_2ck4x")
-offset_left = -5.0
-offset_top = -173.0
-offset_right = 35.0
-offset_bottom = -133.0
+offset_left = -8.0
+offset_top = -176.0
+offset_right = 32.0
+offset_bottom = -116.0
 scale = Vector2(2, 2)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
