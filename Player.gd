@@ -18,6 +18,8 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 1
 @export var HEALTH_RESISTANCE: float = 50
 # As milisecond
 @export var DASH_DURATION: float = 100
+# As milisecond
+@export var JUMP_BUFFER_DURATION: float = 500
 
 var left_most_x_position: float = -999999
 var current_health = 0
@@ -26,7 +28,8 @@ var jump_count = 0
 var is_running = false
 var is_double_jumping = false
 var last_dash_time = 0
-
+# If -1 then there is no jump order
+var last_jump_order_time = 0
 func _ready():
 	current_health = HEALTH
 	$AnimatedSprite2D.play("idle")
@@ -61,7 +64,7 @@ func _physics_process(_delta):
 		current_state = STATE.WALK
 	else:
 		velocity.x = 0
-		
+	
 	# Handle runing
 	if Input.is_action_pressed("move_run") and current_state == STATE.WALK:
 		current_state = STATE.RUN
@@ -70,9 +73,15 @@ func _physics_process(_delta):
 		velocity.x *= 2
 	
 	# Handle jump
-	if Input.is_action_just_pressed("move_jump") and is_on_floor():
+	if is_on_floor() and Time.get_ticks_msec() - last_jump_order_time < JUMP_BUFFER_DURATION:
 		velocity.y += JUMP_STRENGTH
-		current_state = STATE.JUMP
+		last_jump_order_time = 0
+	elif Input.is_action_just_pressed("move_jump"):
+		if is_on_floor():
+			velocity.y += JUMP_STRENGTH
+			current_state = STATE.JUMP
+		else:
+			last_jump_order_time = Time.get_ticks_msec()
 	
 	if velocity.y < 0:
 		if not Input.is_action_pressed("move_jump") and not Input.is_action_just_pressed("move_jump"):
