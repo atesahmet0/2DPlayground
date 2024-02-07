@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=41 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -1939,6 +1939,13 @@ font_color = Color(0.862745, 0.298039, 0.282353, 1)
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_kxx0h"]
+line_spacing = 0.0
+font_size = 10
+font_color = Color(0.862745, 0.298039, 0.282353, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SystemFont" id="SystemFont_yu5rx"]
 font_names = PackedStringArray("Copperplate")
 subpixel_positioning = 0
@@ -2076,6 +2083,15 @@ offset_right = 295.0
 offset_bottom = -75.0
 text = "You can dash whilst mid-air"
 label_settings = SubResource("LabelSettings_ctfr3")
+
+[node name="SubLabel" type="Label" parent="NavigationRegion2D/Labels/DashLabel"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 211.0
+offset_bottom = 79.0
+text = "Also don't fall!"
+label_settings = SubResource("LabelSettings_kxx0h")
 
 [node name="InitialLabel" type="Label" parent="NavigationRegion2D/Labels"]
 offset_left = -355.0
