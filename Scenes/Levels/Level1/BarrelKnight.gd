@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal died(object)
 
-enum STATE {RUN, HIT, JUMP, DEAD, IDLE}
+enum STATE {RUN, HIT, JUMP, FALL, DEAD, IDLE}
 
 @export var HEALTH: int = 100
 @export var TARGET: Node2D
@@ -37,6 +37,10 @@ func _process(delta):
 			$AnimatedSprite2D.play("run")
 		STATE.HIT:
 			$AnimatedSprite2D.play("attack1")
+		STATE.JUMP:
+			$AnimatedSprite2D.play("jump")
+		STATE.FALL:
+			$AnimatedSprite2D.play("fall")
 	
 	# TODO delete later
 	$CircularBar.value = Time.get_ticks_msec() / 5 % 100
@@ -87,13 +91,19 @@ func _physics_process(delta):
 				first_jump_order = -1
 		else:
 			first_jump_order = -1
-		# Target is down and we are jumping so stop jump motion
+		# Target is downwards and we are jumping so stop jump motion
 		if desired_velocity.y > 0 and velocity.y < 0:
 			# velocity.y = 0
 			pass
-		current_state = STATE.RUN
+		
+		if is_zero_approx(velocity.y):
+			current_state = STATE.RUN
+		elif velocity.y < 0:
+			# Jumping
+			current_state = STATE.JUMP
+		elif velocity.y > 0:
+			current_state = STATE.FALL
 	
-	print("Velocity is: " + str(velocity.x))
 	if current_state != STATE.HIT and is_zero_approx(velocity.x):
 		current_state = STATE.IDLE
 	
