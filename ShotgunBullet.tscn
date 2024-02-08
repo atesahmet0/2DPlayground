@@ -47,7 +47,7 @@ size = Vector2(3, 1)
 
 [node name="Node2D" type="RigidBody2D"]
 collision_layer = 1073741824
-collision_mask = 2147483649
+collision_mask = 2147483905
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_fv6yy")
 continuous_cd = 1

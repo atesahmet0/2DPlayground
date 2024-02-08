@@ -2078,6 +2078,7 @@ z_index = 7
 z_as_relative = false
 position = Vector2(-90, -120)
 scale = Vector2(1.7, 1.7)
+HEALTH = 10
 TARGET = NodePath("../Player")
 JUMP_SCALE = -700.0
 
