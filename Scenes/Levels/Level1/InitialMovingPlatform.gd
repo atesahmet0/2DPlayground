@@ -6,6 +6,7 @@ enum STATE {MOVE, FALL, ABOUT_TO_FALL}
 @export var DURATION: float = 4.0 
 @export var fall_on_touch: bool = false
 @export var delay_before_fall: float = 500
+@export_range(0, 1) var seed: float = 0
 
 var current_state = STATE.MOVE
 
@@ -17,6 +18,7 @@ var current_tween = null
 func _ready():
 	initial_position = global_position
 	offset = global_position + OFFSET
+	position = offset * seed
 	start_tween()
 
 
@@ -47,6 +49,7 @@ func fall():
 	
 	var last_position = initial_position + Vector2(0, 2000)
 	current_tween.tween_property(self, "position", last_position, 3.0)
+	current_tween.tween_method(queue_free,0 ,0, 0)
 
 
 func start_tween():
