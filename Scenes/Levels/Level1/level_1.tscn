@@ -2038,6 +2038,7 @@ position = Vector2(0, 11)
 [node name="Shotgun" parent="Player/ShotgunPosition" instance=ExtResource("4_fv4tx")]
 position = Vector2(-7, 0)
 scale = Vector2(0.7, 0.7)
+INITIAL_AMMO_COUNT = 10
 BULLET_SPREAD_SCALE = 0.1
 RECOIL_RETURN_SPEED = 30.0
 

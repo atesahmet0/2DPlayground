@@ -28,13 +28,10 @@ signal weapon_fired(current_ammo: int)
 
 var bullet_scene = preload("res://ShotgunBullet.tscn")
 var shell_scene = preload("res://ShotgunShell.tscn")
-
-# Ammo left in the gun
-var current_ammo: int = INITIAL_AMMO_COUNT
-
+var current_ammo: int = -1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	current_ammo = INITIAL_AMMO_COUNT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
