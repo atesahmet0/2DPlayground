@@ -170,3 +170,8 @@ func got_hit():
 	hit_count += 1
 	if hit_count > 2:
 		died()
+
+# This function helps us to determine if collided body is player.
+# usage node2d.has_method("player_unique_function")
+func player_unique_function():
+	pass
