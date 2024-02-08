@@ -1,9 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=46 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
 [ext_resource type="Script" path="res://Player.gd" id="3_iuck0"]
-[ext_resource type="PackedScene" uid="uid://du862gpryqvtk" path="res://Shotgun.tscn" id="4_fv4tx"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="5_hkadp"]
 [ext_resource type="PackedScene" uid="uid://cypuxt8cq28o0" path="res://Parallax/Springstar/ParallaxSpringstar.tscn" id="6_x2vk5"]
 [ext_resource type="Script" path="res://Parallax/Springstar/ParallaxSpringstar.gd" id="7_ve57k"]
@@ -2031,23 +2030,6 @@ script = ExtResource("3_iuck0")
 JUMP_STRENGTH = -500
 GRAVITY_SCALE = 1.0
 
-[node name="ShotgunPosition" type="Marker2D" parent="Player"]
-z_index = 1
-position = Vector2(0, 11)
-
-[node name="Shotgun" parent="Player/ShotgunPosition" instance=ExtResource("4_fv4tx")]
-position = Vector2(-7, 0)
-scale = Vector2(0.7, 0.7)
-INITIAL_AMMO_COUNT = 10
-BULLET_SPREAD_SCALE = 0.1
-RECOIL_RETURN_SPEED = 30.0
-
-[node name="Muzzle" type="Marker2D" parent="Player/ShotgunPosition/Shotgun"]
-position = Vector2(47.1429, -2.85715)
-
-[node name="Chamber" type="Marker2D" parent="Player/ShotgunPosition/Shotgun"]
-position = Vector2(20, -2.85714)
-
 [node name="HealthLabel" type="Label" parent="Player"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -2277,5 +2259,3 @@ shape = SubResource("WorldBoundaryShape2D_q4564")
 
 [connection signal="moved" from="Camera2D" to="Player" method="_on_camera_2d_moved"]
 [connection signal="character_died" from="Player" to="." method="_on_player_character_died"]
-[connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Camera2D" method="_on_shotgun_weapon_fired"]
-[connection signal="weapon_fired" from="Player/ShotgunPosition/Shotgun" to="Label" method="_on_shotgun_weapon_fired"]
