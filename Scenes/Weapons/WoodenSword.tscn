@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://craitp7ylybbl"]
+
+[ext_resource type="Texture2D" uid="uid://c6o3h111geivm" path="res://tiles/Weapons/WoodenSword.png" id="1_lo165"]
+
+[node name="WoodenSword" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(5, -5)
+texture = ExtResource("1_lo165")
