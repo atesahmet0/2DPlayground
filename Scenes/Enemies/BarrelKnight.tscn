@@ -321,6 +321,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_aa5eo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_6sqgf")
 animation = &"fall"
@@ -332,6 +333,7 @@ shape = SubResource("CapsuleShape2D_jsurw")
 target_desired_distance = 30.0
 
 [node name="Shield" parent="." instance=ExtResource("4_5hgbc")]
+visible = false
 material = SubResource("ShaderMaterial_0jhye")
 anchors_preset = 8
 anchor_left = 0.5
@@ -346,6 +348,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CircularBar" type="TextureProgressBar" parent="."]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

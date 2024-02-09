@@ -21,6 +21,7 @@ atlas = ExtResource("1_g0lo4")
 region = Rect2(176, 8, 104, 136)
 
 [node name="BigTree" type="TextureRect"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_8f26n")
 offset_right = 40.0
 offset_bottom = 40.0

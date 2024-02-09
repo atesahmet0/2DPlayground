@@ -57,6 +57,7 @@ script = ExtResource("1_bwafr")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_v3un5")
 frame_progress = 0.0393691
