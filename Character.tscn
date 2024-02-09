@@ -146,6 +146,4 @@ shape = SubResource("CapsuleShape2D_n72ou")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i7fse")
-animation = &"dash"
-frame = 3
-frame_progress = 0.656126
+animation = &"idle"
