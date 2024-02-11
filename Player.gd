@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 signal character_died
 
-enum STATE {WALK, RUN, JUMP, FALL, DASH, IDLE, DEAD}
+enum SUPER_STATE {ATTACK0, ATTACK1, DASH, NONE}
+enum STATE {WALK, RUN, JUMP, FALL, IDLE, DEAD}
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 100
 
@@ -17,153 +18,89 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity", 980) / 1
 @export var HEALTH: float = 100
 @export var HEALTH_RESISTANCE: float = 50
 # As milisecond
-@export var DASH_DURATION: float = 100
+@export var DASH_DURATION: float = 500
 # As milisecond
 @export var JUMP_BUFFER_DURATION: float = 500
 
 var left_most_x_position: float = -999999
-var current_health = 0
 var current_state = STATE.IDLE
-var jump_count = 0
-var is_running = false
-var is_double_jumping = false
-var last_dash_time = 0
-# If -1 then there is no jump order
-var last_jump_order_time = 0
+var current_super_state: SUPER_STATE = SUPER_STATE.NONE
+var last_attack_type: SUPER_STATE = SUPER_STATE.NONE
+var super_state_order_queue: SuperStateOrderQueue
+
+
 func _ready():
-	current_health = HEALTH
-	$AnimatedSprite2D.play("idle")
+	super_state_order_queue = SuperStateOrderQueue.new() 
+
 
 func _physics_process(_delta):
-	# Handle gravity
-	var gravity = GRAVITY_SCALE * GRAVITY
-	velocity.y += gravity
+	# Gravity
+	if not is_on_floor():
+		velocity.y += GRAVITY * GRAVITY_SCALE
 	
-	# Check if felt to void
-	if void_beginning < position.y:
-		died()
-	
-	# Don't let go back
-	if position.x < left_most_x_position:
-		position.x = left_most_x_position
-	
-	# Finish dash after duration ends
-	if Time.get_ticks_msec() - last_dash_time > DASH_DURATION:
-		current_state = STATE.IDLE
-	
-	# Handle horizontal movement
-	
-	# Ignore movement whilst dash
-	if current_state == STATE.DASH:
-		pass
-	elif Input.is_action_pressed("move_right"):
+	velocity.x = 0
+	if Input.is_action_pressed("move_right"):
 		velocity.x = WALK_SPEED
-		current_state = STATE.WALK
-	elif Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left"):
 		velocity.x = -WALK_SPEED
-		current_state = STATE.WALK
-	else:
-		velocity.x = 0
+	if Input.is_action_just_pressed("move_jump") and is_on_floor():
+		velocity.y = JUMP_STRENGTH
 	
-	# Handle runing
-	if Input.is_action_pressed("move_run") and current_state == STATE.WALK:
-		current_state = STATE.RUN
-	
-	if current_state == STATE.RUN:
-		velocity.x *= 2
-	
-	# Handle jump
-	if is_on_floor() and Time.get_ticks_msec() - last_jump_order_time < JUMP_BUFFER_DURATION:
-		velocity.y += JUMP_STRENGTH
-		last_jump_order_time = 0
-	elif Input.is_action_just_pressed("move_jump"):
-		if is_on_floor():
-			velocity.y += JUMP_STRENGTH
-			current_state = STATE.JUMP
-		else:
-			last_jump_order_time = Time.get_ticks_msec()
-	
-	if velocity.y < 0:
-		if not Input.is_action_pressed("move_jump") and not Input.is_action_just_pressed("move_jump"):
-			# If moving up and jump button released then don't jump anymore
-			velocity.y /= 4 
-	
-	if Input.is_action_just_pressed("move_down"):
-			velocity.y = 60 * GRAVITY
-		
-	if Input.is_action_just_pressed("move_dash") and current_state != STATE.DASH:
-		current_state = STATE.DASH
-		last_dash_time = Time.get_ticks_msec()
-		velocity.x *= 1 + ((DASH_DURATION - Time.get_ticks_msec() + last_dash_time) / DASH_DURATION * 3)
-	
-	# Get down from platform
-	if Input.is_action_just_pressed("move_down") and is_on_floor():
-		position.y += 2
-	
+	match super_state_order_queue.next().order_type:
+		SUPER_STATE.NONE:
+			if Input.is_action_just_pressed("click"):
+				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
+		SUPER_STATE.ATTACK0:
+			if Input.is_action_just_pressed("click"):
+				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK1, 1000))
+		SUPER_STATE.ATTACK1:
+			if Input.is_action_just_pressed("click"):
+				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
+		SUPER_STATE.DASH:
+			pass
 	move_and_slide()
 
 
-var is_dead = false
 func _process(delta):
-	# Handle health label
-	$HealthLabel.text = str(3 - hit_count)
-	
 	handle_animation()
 
 
 func handle_animation():
-	var current_animation
 	var hflip = $AnimatedSprite2D.flip_h
-	
-	# Increase animation speed while running
-	if is_running:
-		$AnimatedSprite2D.speed_scale = RUN_SCALE
-	else:
-		$AnimatedSprite2D.speed_scale = 1
-	
-	if velocity.is_zero_approx():
-		# Standing still
-		current_animation = "idle"
-	else:
-		current_animation = "run"
-	
 	# Determine which side to face
 	if global_position.x - get_global_mouse_position().x > 0:
 		# Flip
 		hflip = true
 	else:
 		hflip= false
+	$AnimatedSprite2D.flip_h = hflip
 	
-	# In 2D down is positive y
-	if velocity.y > 0 and not velocity.is_zero_approx():
-		current_animation = "fall"
-		
-	elif velocity.y < 0 and not velocity.is_zero_approx():
-		current_animation = "jump"
-	
-	if is_double_jumping and velocity.y < 0:
-		current_animation = "double_jump"
-	
-	if current_state == STATE.DASH:
-		current_animation = "dash"
+	var current_animation = "idle"
+	match super_state_order_queue.next().order_type:
+		SUPER_STATE.NONE:
+			pass
+		SUPER_STATE.ATTACK0:
+			current_animation = "attack0"
+		SUPER_STATE.ATTACK1:
+			current_animation = "attack1"
 	
 	$AnimatedSprite2D.play(current_animation)
-	$AnimatedSprite2D.flip_h = hflip
+
 
 func died():
 	current_state = STATE.DEAD
-	is_dead = true
 	character_died.emit()
-	
+
+
 func on_enemy_hit(enemy: CharacterBody2D):
-	current_health -= 10 / HEALTH_RESISTANCE
-	if current_health <= 0:
-		died()
-		
+	died()
+
+
 func _on_camera_2d_moved(camera):
 	# Calculate possible lowest x position of the character
 	var _left_most_x_position = position.x - (get_viewport_rect().size.x / 2)
 	left_most_x_position = _left_most_x_position
+
 
 var hit_count = 0
 func got_hit():
@@ -171,7 +108,58 @@ func got_hit():
 	if hit_count > 2:
 		died()
 
+
 # This function helps us to determine if collided body is player.
 # usage node2d.has_method("player_unique_function")
 func player_unique_function():
 	pass
+
+
+# End superstate after animation finish
+func _on_animated_sprite_2d_frame_changed():
+	match super_state_order_queue.next().order_type:
+		SUPER_STATE.NONE:
+			return
+		SUPER_STATE.ATTACK0:
+			if $AnimatedSprite2D.get_frame() == 3:
+				super_state_order_queue.pop()
+		SUPER_STATE.ATTACK1:
+			if $AnimatedSprite2D.get_frame() == 2:
+				super_state_order_queue.pop()
+
+
+class SuperStateOrder:
+	# Time each order can persist. As msec
+	var order_time: float
+	var order_duration: float
+	var order_type: SUPER_STATE
+
+
+	func _init(_order_type: SUPER_STATE, _order_duration: float):
+		order_duration = _order_duration
+		order_type = _order_type
+		order_time = Time.get_ticks_msec()
+
+
+class SuperStateOrderQueue:
+	var _orders: Array[SuperStateOrder]
+	var _dummy: SuperStateOrder
+
+
+	func _init():
+		_dummy = SuperStateOrder.new(SUPER_STATE.NONE, 0)
+
+
+	func add(order: SuperStateOrder):
+		_orders.push_back(order)
+
+
+	func pop() -> SuperStateOrder:
+		var current_order: SuperStateOrder = _orders.pop_front()
+		while current_order != null and Time.get_ticks_msec() - current_order.order_time > current_order.order_duration:
+			current_order = _orders.pop_front()
+		return current_order
+
+
+	func next() -> SuperStateOrder:
+		return _orders[0] if _orders.size() > 0 else _dummy

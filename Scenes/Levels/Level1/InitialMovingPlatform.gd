@@ -49,7 +49,7 @@ func fall():
 	
 	var last_position = initial_position + Vector2(0, 2000)
 	current_tween.tween_property(self, "position", last_position, 3.0)
-	current_tween.tween_method(queue_free,0 ,0, 0)
+	current_tween.tween_callback(queue_free)
 
 
 func start_tween():
