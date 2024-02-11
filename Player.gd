@@ -34,10 +34,13 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if position.y > void_beginning:
+		died()
+	
 	# Gravity
 	if not is_on_floor():
 		velocity.y += GRAVITY * GRAVITY_SCALE
-	
+		
 	velocity.x = 0
 	if Input.is_action_pressed("move_right"):
 		velocity.x = WALK_SPEED
@@ -78,7 +81,14 @@ func handle_animation():
 	var current_animation = "idle"
 	match super_state_order_queue.next().order_type:
 		SUPER_STATE.NONE:
-			pass
+			if velocity.is_zero_approx():
+				current_animation = "idle"
+			elif velocity.y > 0:
+				current_animation = "fall"
+			elif velocity.y < 0:
+				current_animation = "jump"
+			else:
+				current_animation = "run"
 		SUPER_STATE.ATTACK0:
 			current_animation = "attack0"
 		SUPER_STATE.ATTACK1:
