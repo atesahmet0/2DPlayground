@@ -7,10 +7,12 @@ var is_game_started = false
 func _ready():
 	if not is_game_started:
 		$MainMenu.set_visible(true)
-		
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
 
 # Called when start game clicked.
 func _on_main_menu_start_clicked():
@@ -22,12 +24,15 @@ func _on_main_menu_start_clicked():
 	$MainMenu.set_visible(false)
 	set_level(level1)
 
+
 # Exi game.
 func _on_main_menu_exit_clicked():
 	get_tree().quit()
 
+
 func _on_character_died():
 	set_level(level1)
+
 
 func set_level(level):
 	# Remove current level
@@ -38,3 +43,4 @@ func set_level(level):
 	call_deferred("add_child", new_level)
 	new_level.character_died.connect(_on_character_died)
 	current_level = new_level
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

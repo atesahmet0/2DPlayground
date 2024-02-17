@@ -292,7 +292,7 @@ animation = &"attack0"
 position = Vector2(0, 1)
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashBox"]
+[node name="SlashShape" type="CollisionShape2D" parent="SlashBox"]
 position = Vector2(11, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_a7vhn")

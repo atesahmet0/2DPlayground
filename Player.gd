@@ -27,6 +27,7 @@ var current_state = STATE.IDLE
 var current_super_state: SUPER_STATE = SUPER_STATE.NONE
 var last_attack_type: SUPER_STATE = SUPER_STATE.NONE
 var super_state_order_queue: SuperStateOrderQueue
+var is_flipped: bool = false
 
 
 func _ready():
@@ -36,6 +37,12 @@ func _ready():
 func _physics_process(_delta):
 	if position.y > void_beginning:
 		died()
+	
+	# Attack box's facing
+	if is_flipped:
+		$SlashBox/SlashShape.position.x = -11
+	else:
+		$SlashBox/SlashShape.position.x = 11
 	
 	# Gravity
 	if not is_on_floor():
@@ -104,10 +111,11 @@ func handle_animation():
 	if global_position.x - target.x > 0:
 		# Flip
 		hflip = true
+		is_flipped = true
 	else:
 		hflip= false
+		is_flipped = false
 	
-	$SlashBox.rotation_degrees = 180 if hflip else 0
 	$AnimatedSprite2D.flip_h = hflip
 	
 	var current_animation = "idle"
