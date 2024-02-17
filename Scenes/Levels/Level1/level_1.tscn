@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dbafsfjkbroho"]
+[gd_scene load_steps=50 format=3 uid="uid://dbafsfjkbroho"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1/level_1.gd" id="1_b73o2"]
 [ext_resource type="PackedScene" uid="uid://bt0gjlkdsaq6s" path="res://Character.tscn" id="2_54eo4"]
@@ -19,6 +19,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nk62"]
 size = Vector2(18, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vf8w0"]
+radius = 60.8471
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cvp3o"]
 vertices = PackedVector2Array(1204, -28, -324, -28, -84, -80, 1204, -324, -204, -80, -84, -109, -100, -107, -100, -109, -116, -107, -116, -109, -132, -107, -132, -109, -148, -107, -148, -109, -164, -107, -164, -109, -260, -109, -276, -107, -276, -109, -292, -107, -292, -109, -308, -107, -308, -109, -324, -107, -324, -108, -484, -324, -204, -106, -324, -80, -260, -80, -484, -108)
@@ -2217,6 +2220,13 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/StackPrevent"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2nk62")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/EnemyDetectionArea"]
+shape = SubResource("CircleShape2D_vf8w0")
 
 [node name="BarrelKnight" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("14_ntqcl")]
 z_index = 7

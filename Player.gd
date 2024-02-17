@@ -85,11 +85,28 @@ func _process(delta):
 func handle_animation():
 	var hflip = $AnimatedSprite2D.flip_h
 	# Determine which side to face
-	if global_position.x - get_global_mouse_position().x > 0:
+	var bodies = $EnemyDetectionArea.get_overlapping_bodies()
+	var target = global_position
+	if velocity.x < 0:
+		target.x -= 10
+	else:
+		target.x += 10
+	
+	var max = [0, -9999999]
+	for i in range(0, bodies.size()):
+		var distance = position.distance_squared_to(bodies[i].position)
+		if distance > max[1]:
+			max = [i, distance]
+	
+	if not bodies.is_empty():
+		target = bodies[max[0]].global_position
+	
+	if global_position.x - target.x > 0:
 		# Flip
 		hflip = true
 	else:
 		hflip= false
+	
 	$SlashBox.rotation_degrees = 180 if hflip else 0
 	$AnimatedSprite2D.flip_h = hflip
 	
