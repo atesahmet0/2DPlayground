@@ -115,7 +115,7 @@ func _on_camera_2d_moved(camera):
 var hit_count = 0
 func got_hit():
 	hit_count += 1
-	if hit_count > 2:
+	if hit_count > 0:
 		died()
 
 
