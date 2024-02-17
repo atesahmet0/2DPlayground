@@ -54,7 +54,7 @@ func _physics_process(_delta):
 			if Input.is_action_just_pressed("move_dash"):
 				super_state_order_queue.flush()
 			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
-				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 10000))
+				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
 
 		SUPER_STATE.ATTACK0:
 			if Input.is_action_just_pressed("move_dash"):
@@ -62,7 +62,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
 				super_state_order_queue.add(
 					SuperStateOrder.new(SUPER_STATE.ATTACK1 if super_state_order_queue.last().order_type == SUPER_STATE.ATTACK0
-					else SUPER_STATE.ATTACK0, 10000))
+					else SUPER_STATE.ATTACK0, 1000))
 
 		SUPER_STATE.ATTACK1:
 			if Input.is_action_just_pressed("move_dash"):
@@ -70,7 +70,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
 				super_state_order_queue.add(
 					SuperStateOrder.new(SUPER_STATE.ATTACK1 if super_state_order_queue.last().order_type == SUPER_STATE.ATTACK0
-					else SUPER_STATE.ATTACK0, 10000))
+					else SUPER_STATE.ATTACK0, 1000))
 
 		SUPER_STATE.DASH:
 			pass

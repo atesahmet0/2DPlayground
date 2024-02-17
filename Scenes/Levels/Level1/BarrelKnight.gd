@@ -4,7 +4,7 @@ signal died(object)
 
 enum STATE {RUN, HIT, JUMP, FALL, DEAD, IDLE}
 
-@export var HEALTH: int = 100
+@export var HEALTH: int = 5
 @export var TARGET: Node2D
 @export var SPEED: float = 50
 @export var GRAVITY_SCALE: float = 2
@@ -20,6 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") / 100
 var current_health: float = 0
 var current_state: STATE = STATE.IDLE
 var is_flipped: bool = false
+
 
 func _ready():
 	current_health = HEALTH
@@ -116,6 +117,7 @@ func actor_setup():
 		$NavigationAgent2D.target_position = TARGET.global_position
 
 
+# Legacy
 var bullet_count = 0
 func bullet_hit(bullet: RigidBody2D):
 	# If dead don't do anything
@@ -132,8 +134,11 @@ func bullet_hit(bullet: RigidBody2D):
 	bullet.queue_free()
 
 
+# Melee hit
 func got_hit():
-	die()
+	current_health -= 1
+	if current_health <= 0:
+		die()
 
 
 func die():
@@ -162,8 +167,8 @@ func attack():
 func jump():
 	if is_on_floor():
 		velocity.y += JUMP_SCALE
-	
-	
+
+
 func _on_animated_sprite_2d_frame_changed():
 	if current_state == STATE.HIT and ($AnimatedSprite2D.get_frame() == 4 or $AnimatedSprite2D.get_frame() == 11):
 		# Weapon swing frame
