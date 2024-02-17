@@ -51,16 +51,30 @@ func _physics_process(_delta):
 	
 	match super_state_order_queue.next().order_type:
 		SUPER_STATE.NONE:
-			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
-				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
+			if Input.is_action_just_pressed("move_dash"):
+				super_state_order_queue.flush()
+			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
+				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 10000))
+
 		SUPER_STATE.ATTACK0:
-			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
-				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK1, 1000))
+			if Input.is_action_just_pressed("move_dash"):
+				super_state_order_queue.flush()
+			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
+				super_state_order_queue.add(
+					SuperStateOrder.new(SUPER_STATE.ATTACK1 if super_state_order_queue.last().order_type == SUPER_STATE.ATTACK0
+					else SUPER_STATE.ATTACK0, 10000))
+
 		SUPER_STATE.ATTACK1:
-			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
-				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
+			if Input.is_action_just_pressed("move_dash"):
+				super_state_order_queue.flush()
+			elif Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
+				super_state_order_queue.add(
+					SuperStateOrder.new(SUPER_STATE.ATTACK1 if super_state_order_queue.last().order_type == SUPER_STATE.ATTACK0
+					else SUPER_STATE.ATTACK0, 10000))
+
 		SUPER_STATE.DASH:
 			pass
+
 	move_and_slide()
 
 
@@ -160,8 +174,8 @@ class SuperStateOrder:
 	var order_time: float
 	var order_duration: float
 	var order_type: SUPER_STATE
-
-
+	
+	
 	func _init(_order_type: SUPER_STATE, _order_duration: float):
 		order_duration = _order_duration
 		order_type = _order_type
@@ -171,22 +185,30 @@ class SuperStateOrder:
 class SuperStateOrderQueue:
 	var _orders: Array[SuperStateOrder]
 	var _dummy: SuperStateOrder
-
-
+	
+	
 	func _init():
 		_dummy = SuperStateOrder.new(SUPER_STATE.NONE, 0)
-
-
+	
+	
 	func add(order: SuperStateOrder):
 		_orders.push_back(order)
-
-
+	
+	
 	func pop() -> SuperStateOrder:
 		var current_order: SuperStateOrder = _orders.pop_front()
 		while current_order != null and Time.get_ticks_msec() - current_order.order_time > current_order.order_duration:
 			current_order = _orders.pop_front()
 		return current_order
-
-
+	
+	
 	func next() -> SuperStateOrder:
 		return _orders[0] if _orders.size() > 0 else _dummy
+	
+	
+	func last() -> SuperStateOrder:
+		return _orders[_orders.size() - 1]  if _orders.size() > 0 else _dummy
+	
+	
+	func flush():
+		_orders.clear()
