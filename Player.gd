@@ -51,13 +51,13 @@ func _physics_process(_delta):
 	
 	match super_state_order_queue.next().order_type:
 		SUPER_STATE.NONE:
-			if Input.is_action_just_pressed("click"):
+			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
 				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
 		SUPER_STATE.ATTACK0:
-			if Input.is_action_just_pressed("click"):
+			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
 				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK1, 1000))
 		SUPER_STATE.ATTACK1:
-			if Input.is_action_just_pressed("click"):
+			if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("attack"):
 				super_state_order_queue.add(SuperStateOrder.new(SUPER_STATE.ATTACK0, 1000))
 		SUPER_STATE.DASH:
 			pass
