@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bt0gjlkdsaq6s"]
+[gd_scene load_steps=38 format=3 uid="uid://bt0gjlkdsaq6s"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ecssp"]
 [ext_resource type="Texture2D" uid="uid://crmck4sue7wx" path="res://Scenes/Characters/DarkSamurai/DarkSamurai (64x64).png" id="1_rdr2q"]
@@ -269,6 +269,10 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a7vhn"]
+radius = 13.0
+height = 38.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
@@ -282,7 +286,15 @@ shape = SubResource("CapsuleShape2D_n72ou")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_i7fse")
-animation = &"attack1"
-frame_progress = 0.463652
+animation = &"attack0"
+
+[node name="SlashBox" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashBox"]
+position = Vector2(11, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a7vhn")
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

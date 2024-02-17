@@ -40,7 +40,7 @@ func _physics_process(_delta):
 	# Gravity
 	if not is_on_floor():
 		velocity.y += GRAVITY * GRAVITY_SCALE
-		
+	
 	velocity.x = 0
 	if Input.is_action_pressed("move_right"):
 		velocity.x = WALK_SPEED
@@ -76,6 +76,7 @@ func handle_animation():
 		hflip = true
 	else:
 		hflip= false
+	$SlashBox.rotation_degrees = 180 if hflip else 0
 	$AnimatedSprite2D.flip_h = hflip
 	
 	var current_animation = "idle"
@@ -133,9 +134,25 @@ func _on_animated_sprite_2d_frame_changed():
 		SUPER_STATE.ATTACK0:
 			if $AnimatedSprite2D.get_frame() == 3:
 				super_state_order_queue.pop()
+			elif $AnimatedSprite2D.get_frame() == 1:
+				# Deal damage
+				var bodies = $SlashBox.get_overlapping_bodies()
+				for body in bodies:
+					if body != self:
+						# Hit the target
+						if body.has_method("got_hit"):
+							body.got_hit()
 		SUPER_STATE.ATTACK1:
 			if $AnimatedSprite2D.get_frame() == 2:
 				super_state_order_queue.pop()
+			elif $AnimatedSprite2D.get_frame() == 0:
+				# Deal damage
+				var bodies = $SlashBox.get_overlapping_bodies()
+				for body in bodies:
+					if body != self:
+						# Hit the target
+						if body.has_method("got_hit"):
+							body.got_hit()
 
 
 class SuperStateOrder:

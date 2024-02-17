@@ -132,6 +132,10 @@ func bullet_hit(bullet: RigidBody2D):
 	bullet.queue_free()
 
 
+func got_hit():
+	die()
+
+
 func die():
 	died.emit(self)
 	current_state = STATE.DEAD
